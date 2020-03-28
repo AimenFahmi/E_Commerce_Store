@@ -3,9 +3,10 @@
 //
 
 #include "store.h"
-#include "HashTable.h"
+#include "../hash_table/HashTable.h"
 #include <string.h>
 #include <time.h>
+#include "../util/Failure.h"
 
 
 // Returns a random item name (obviously)
@@ -35,10 +36,7 @@ store_t *createStore() {
 
     store_t *newStore = malloc(sizeof(store_t));
 
-    if (!newStore) {
-        printf("Store creation had a problem allocating memory\n");
-        exit(-1);
-    }
+    manageMallocFailures(newStore, "store_t");
 
     newStore->stock = createHashTable(STORE_SIZE);
 

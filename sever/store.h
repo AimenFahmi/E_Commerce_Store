@@ -5,7 +5,7 @@
 #ifndef E_COMMERCE_STORE_STORE_H
 #define E_COMMERCE_STORE_STORE_H
 
-#include "HashTable.h"
+#include "../hash_table/HashTable.h"
 #include <stdio.h>
 #include <stdlib.h>
 

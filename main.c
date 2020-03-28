@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "store.h"
+#include "sever/store.h"
 
 int main() {
     // Creating and initializing the store randomly after every execution

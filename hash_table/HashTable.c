@@ -6,23 +6,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../util/Failure.h"
 
 // Memory allocation for a hashtable
 hash_table_t *createHashTable(int size) {
 
     hash_table_t *newHashTable = malloc(sizeof(hash_table_t));
 
-    if (!newHashTable) {
-        printf("Hash table had a problem allocating memory \n");
-        exit(-1);
-    }
+    manageMallocFailures(newHashTable, "hash_table_t");
 
     newHashTable->entries = malloc(size * sizeof(key_value_pair_t *));
 
-    if (!newHashTable->entries) {
-        printf("Hash table entries had a problem allocating memory \n");
-        exit(-1);
-    }
+    manageMallocFailures(newHashTable->entries, "hash_table_t entries");
 
     for (int i = 0; i < size; ++i) {
         newHashTable->entries[i] = NULL;
@@ -39,10 +34,7 @@ value_t *createValue(int value) {
 
     value_t *newValue = malloc(sizeof(value_t));
 
-    if (!newValue) {
-        printf("Value creation had a problem allocating memory \n");
-        exit(-1);
-    }
+    manageMallocFailures(newValue, "value_t");
 
     newValue->nb_items = value;
 
@@ -55,10 +47,7 @@ key_value_pair_t *createKeyValuePair(const char *key, value_t *value) {
 
     key_value_pair_t *newEntry = malloc(sizeof(key_value_pair_t));
 
-    if (!newEntry) {
-        printf("Entry creation had a problem allocating memory \n");
-        exit(-1);
-    }
+    manageMallocFailures(newEntry, "key_value_pair_t");
 
     newEntry->value = value;
     newEntry->key = key;
