@@ -40,7 +40,7 @@ store_t *createStore() {
         exit(-1);
     }
 
-    newStore->stock = createHashTable(100);
+    newStore->stock = createHashTable(STORE_SIZE);
 
     initializeStore(newStore->stock->size, newStore);
 

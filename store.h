@@ -11,6 +11,8 @@
 
 /** data **/
 
+#define STORE_SIZE 100
+
 typedef struct {
     hash_table_t *stock;
 } store_t;
