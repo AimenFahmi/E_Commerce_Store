@@ -51,16 +51,17 @@ int talkToClient(unsigned int client_port) {
 
     listen(socket, 5);
 
+    printf("[+] Waiting for connections ...\n");
+
     while (1) {
-        printf("[+] Waiting for connections ...\n");
+        memset(message_to_receive, '\0', sizeof(message_to_receive));
+
 
         int client_socket = accept(socket, NULL, NULL);
 
         if (client_socket < 0) {
             printf("[-] Could not accept client on port %d\n", client_port);
             return -1;
-        } else {
-            printf("[+] Server accepted connection to client on port %d\n", client_port);
         }
 
         int message_reception_status = recv(client_socket, message_to_receive, sizeof(message_to_receive), 0);
@@ -68,7 +69,7 @@ int talkToClient(unsigned int client_port) {
         if (message_reception_status < 0) {
             printf("[-] Could not receive message from client on port %d\n", client_port);
             return -1;
-        } else if (strcmp(message_to_receive, "exit server") == 0) {
+        } else if (strcmp(message_to_receive, "exit") == 0) {
             close(client_socket);
             break;
         } else {
@@ -77,6 +78,7 @@ int talkToClient(unsigned int client_port) {
 
     }
 
+    printf("[+] Server has become disconnected\n");
     return 0;
 }
 

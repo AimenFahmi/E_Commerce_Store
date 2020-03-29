@@ -46,17 +46,18 @@ int main() {
     unsigned int server_port = 9005;
 
     while (1) {
-        getLine("Write message to server -> ", message_to_send, sizeof(message_to_send));
+        memset(message_to_send, '\0', sizeof(message_to_send));
+        getLine("\nWrite message to server -> ", message_to_send, sizeof(message_to_send));
         printf("\n");
-        if (strcmp(message_to_send, "exit") == 0) {
+
+        int talking_status = talkToServer(server_port, message_to_send, strlen(message_to_send));
+
+        if (talking_status < 0) {
+            printf("[-] Client was unable to talk to server at port %d", server_port);
+            break;
+        } else if (strcmp(message_to_send, "exit") == 0) {
             printf("[+] Connection terminated\n");
             break;
-        } else {
-            int talking_status = talkToServer(server_port, message_to_send, strlen(message_to_send));
-            if (talking_status < 0) {
-                printf("[-] Client was unable to talk to server at port %d", server_port);
-                break;
-            }
         }
     }
 
