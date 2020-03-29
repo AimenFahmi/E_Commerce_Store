@@ -2,7 +2,7 @@
 // Created by Aimen Fahmi on 2020-03-29.
 //
 
-#include "RegularClient.h"
+#include "Shop.h"
 #include "../util/client_utilities/ClientUtilities.h"
 
 #include <stdlib.h>
