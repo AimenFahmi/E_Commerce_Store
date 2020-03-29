@@ -3,73 +3,62 @@
 //
 
 #include "RegularClient.h"
+#include "../util/client_utilities/ClientUtilities.h"
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <sys/socket.h>
-#include <netinet/in.h>
 #include <string.h>
-#include<arpa/inet.h>
 
-#define PORT 9005
+#define OK       0
+#define NO_INPUT 1
+#define TOO_LONG 2
 
+int getLine (char *prompt, char *buff, size_t sz) {
+    int ch, extra;
 
-// Returns descriptor of the socket if successfully created.
-// Else, returns -1;
-int createSocket() {
-    return socket(AF_INET, SOCK_STREAM, 0);
-}
+    // Get line with buffer overrun protection.
+    if (prompt != NULL) {
+        printf ("%s", prompt);
+        fflush (stdout);
+    }
+    if (fgets (buff, sz, stdin) == NULL)
+        return NO_INPUT;
 
-// Returns 0 if successfully connected
-// Returns -1 otherwise
-int connectToServer(int socket, unsigned int server_port) {
-    struct sockaddr_in server_address = {0};
+    // If it was too long, there'll be no newline. In that case, we flush
+    // to end of line so that excess doesn't affect the next call.
+    if (buff[strlen(buff)-1] != '\n') {
+        extra = 0;
+        while (((ch = getchar()) != '\n') && (ch != EOF))
+            extra = 1;
+        return (extra == 1) ? TOO_LONG : OK;
+    }
 
-    server_address.sin_addr.s_addr = INADDR_ANY;
-    server_address.sin_family = AF_INET;
-    server_address.sin_port = htons(server_port);
-
-    return connect(socket, (struct sockaddr *) &server_address, sizeof(server_address));
-}
-
-
-// Returns 0 if successfully sent
-// Returns -1 otherwise
-int sendRequest(int socket, char *request_message, int request_length) {
-    return send(socket, request_message, request_length, 0);
-}
-
-// Returns 0 if successfully sent
-// Returns -1 otherwise
-int receiveResponse(int socket, char *to_store_response, int response_length) {
-    return recv(socket, to_store_response, response_length, 0);
+    // Otherwise remove newline and give string back to caller.
+    buff[strlen(buff)-1] = '\0';
+    return OK;
 }
 
 int main() {
 
+    char message_to_send[100] = {0};
+    unsigned int server_port = 9005;
 
-
-    int socket = createSocket();
-
-    if (socket == -1) {
-        printf("[-] Socket creation failed\n");
-        return -1;
-    } else {
-        printf("[+] Socket has been created\n");
+    while (1) {
+        getLine("Write message to server -> ", message_to_send, sizeof(message_to_send));
+        printf("\n");
+        if (strcmp(message_to_send, "exit") == 0) {
+            printf("[+] Connection terminated\n");
+            break;
+        } else {
+            int talking_status = talkToServer(server_port, message_to_send, strlen(message_to_send));
+            if (talking_status < 0) {
+                printf("[-] Client was unable to talk to server at port %d", server_port);
+                break;
+            }
+        }
     }
-
-    int connection_status = connectToServer(socket, PORT);
-
-    if (connection_status < 0) {
-        printf("[-] Connection to server on port %d failed\n", PORT);
-        return -1;
-    } else {
-        printf("[+] Client successfully connected to the server on port %d\n", PORT);
-    }
-
-
-
 
     return 0;
 }

@@ -6,7 +6,7 @@
 #include "../hash_table/HashTable.h"
 #include <string.h>
 #include <time.h>
-#include "../util/Failure.h"
+#include "../util/exception_handling/Failure.h"
 
 
 // Returns a random item name (obviously)

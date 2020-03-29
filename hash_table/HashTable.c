@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../util/Failure.h"
+#include "../util/exception_handling/Failure.h"
 
 // Memory allocation for a hashtable
 hash_table_t *createHashTable(int size) {

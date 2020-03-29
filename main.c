@@ -1,10 +1,11 @@
 #include <stdio.h>
 
 #include "sever/store.h"
+#include "util/server_utilities/ServerUtilities.h"
 
 int main() {
     // Creating and initializing the store randomly after every execution
-    store_t *store = createStore();
+    /*store_t *store = createStore();
 
     displayStore(store);
 
@@ -24,7 +25,9 @@ int main() {
     else printf("\n\nRequest was unsuccessful");
 
 
-    displayStore(store);
+    displayStore(store);*/
+
+    talkToClient(9005);
 
     return 0;
 }
