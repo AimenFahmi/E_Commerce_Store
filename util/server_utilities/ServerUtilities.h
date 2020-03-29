@@ -9,6 +9,5 @@
 
 int createServerSocket();
 int bindCreatedSocket(int socket, unsigned int client_port);
-int talkToClient(unsigned int client_port);
 
 #endif //E_COMMERCE_STORE_SERVERUTILITIES_H

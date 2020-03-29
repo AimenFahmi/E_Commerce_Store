@@ -92,8 +92,7 @@ void add(const char *key, value_t *value, hash_table_t *hashTable) {
     while (entry != NULL) {
 
         if (strcmp(entry->key, key) == 0) {
-            free(entry->value);
-            entry->value = value;
+            memcpy(entry->value, value, sizeof(value_t));
             return;
         }
         prev = entry;
@@ -114,7 +113,7 @@ value_t *getValue(const char *key, hash_table_t *hashTable) {
 
     if (entry == NULL) {
         printf("Item does not exit");
-        exit(-1);
+        return NULL;
     }
 
     if (strcmp(key, entry->key) == 0) {

@@ -5,7 +5,7 @@
 
 int main() {
     // Creating and initializing the store randomly after every execution
-    /*store_t *store = createStore();
+    store_t *store = createStore();
 
     displayStore(store);
 
@@ -25,9 +25,7 @@ int main() {
     else printf("\n\nRequest was unsuccessful");
 
 
-    displayStore(store);*/
-
-    talkToClient(9005);
+    displayStore(store);
 
     return 0;
 }

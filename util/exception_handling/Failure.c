@@ -13,3 +13,4 @@ void manageMallocFailures(void *pointer, const char *name) {
         exit(-1);
     }
 }
+
