@@ -51,8 +51,6 @@ int talkToClient(unsigned int client_port) {
 
     listen(socket, 5);
 
-    printf("[+] Waiting for connections ...\n");
-
     while (1) {
         memset(message_to_receive, '\0', sizeof(message_to_receive));
 

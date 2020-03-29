@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "sever/store.h"
+#include "server/store.h"
 #include "util/server_utilities/ServerUtilities.h"
 
 int main() {
