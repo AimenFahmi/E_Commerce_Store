@@ -50,6 +50,7 @@ key_value_pair_t *createKeyValuePair(const char *key, value_t *value) {
     manageMallocFailures(newEntry, "key_value_pair_t");
 
     newEntry->value = value;
+
     newEntry->key = key;
 
     newEntry->next = NULL;
@@ -112,7 +113,7 @@ value_t *getValue(const char *key, hash_table_t *hashTable) {
     key_value_pair_t *entry = hashTable->entries[index];
 
     if (entry == NULL) {
-        printf("Item does not exit");
+        printf("[-] Item '%s' does not exit\n", key);
         return NULL;
     }
 
@@ -173,6 +174,8 @@ void printHashTable(hash_table_t *hashTable) {
         }
 
     }
+
+    printf("\n");
 }
 
 

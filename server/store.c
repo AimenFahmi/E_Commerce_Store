@@ -25,7 +25,7 @@ const char *getRandomItemName() {
 void initializeStore(int size, store_t *store) {
 
     for (int i = 0; i < 5*size; ++i) {
-        add(getRandomItemName(), createValue(rand()%500), store->stock);
+        add(getRandomItemName(), createValue(rand()%10+1), store->stock);
     }
 }
 
@@ -61,14 +61,23 @@ int requestItem(const char *itemName, int amount, store_t *store) {
     }
 }
 
-void addItem(const char *itemName, int amount, store_t *store) {
+
+int writeItemToStore(const char *itemName, int amount, store_t *store) {
+    add(itemName, createValue(amount), store->stock);
+}
+
+int increaseCountOfItem(const char *itemName, int amount, store_t *store) {
     value_t *current_value = getValue(itemName, store->stock);
 
     if (current_value == NULL) {
-        add(itemName, createValue(amount), store->stock);
+        return -1;
+    } else if(current_value->nb_items > 3) {
+        printf("[-] The count of item '%s' is bigger than 3\n", itemName);
+        return -1;
     } else {
         current_value->nb_items += amount;
         add(itemName, current_value, store->stock);
+        return 0;
     }
 }
 

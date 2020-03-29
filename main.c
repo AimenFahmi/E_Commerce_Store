@@ -10,10 +10,10 @@ int main() {
     displayStore(store);
 
     // Adding a not already existing amount of items to the store
-    addItem("cashew nuts", 999, store);
+    increaseCountOfItem("cashew nuts", 999, store);
 
     // Adding an existing amount of items to the store
-    addItem("socks", 100, store);
+    increaseCountOfItem("socks", 100, store);
 
     // Getting the available number of items in the store of a specific item
     printf("\n\nValue got: %d", getValue("cashew nuts", store->stock)->nb_items);

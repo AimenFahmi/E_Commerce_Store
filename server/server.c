@@ -11,78 +11,86 @@
 #include <unistd.h>
 
 #include "../util/server_utilities/ServerUtilities.h"
+#include "../util/exception_handling/Failure.h"
 
-/*C substring function: It returns a pointer to the substring */
+#define UNABLE_TO_INCREASE_COUNT_ERROR -2
+#define DISCONNECT -3
 
-char *substring(char *string, int position, int length)
-{
-    char *pointer;
-    int c;
 
-    pointer = malloc(length+1);
+char **tokenize(char *string, int string_size, char *delimiter) {
+    int number_of_tokens = 0;
+    char *temp_string_1 = malloc(string_size);
+    char *temp_string_2 = malloc(string_size);
 
-    if (pointer == NULL)
-    {
-        printf("Unable to allocate memory.\n");
-        exit(1);
+    manageMallocFailures(temp_string_1, "variable in tokenize()");
+    manageMallocFailures(temp_string_2, "variable in tokenize()");
+
+    strcpy(temp_string_1, string);
+    strcpy(temp_string_2, string);
+
+    char *token = strtok(temp_string_1, delimiter);
+
+    while (token != NULL) {
+        number_of_tokens++;
+        token = strtok(NULL, delimiter);
     }
 
-    for (c = 0 ; c < length ; c++)
-    {
-        *(pointer+c) = *(string+position-1);
-        string++;
+    char **tokens = malloc(number_of_tokens * sizeof(char *));
+
+    manageMallocFailures(tokens, "tokens in server.c/tokenize()");
+
+    tokens[0] = strtok(temp_string_2, delimiter);
+
+    for (int i = 1; i < number_of_tokens; ++i) {
+        tokens[i] = strtok(NULL, delimiter);
     }
 
-    *(pointer+c) = '\0';
-
-    return pointer;
+    return tokens;
 }
 
-key_value_pair_t *parseClientMessage(char *received_message, int message_length, char delimiter) {
+request_t *parseClientMessage(char *received_message, int message_size) {
 
-    char *key;
-    int amount;
+    request_t *request = malloc(sizeof(request_t));
+    manageMallocFailures(request, "request in parseClientMessage()");
 
-    int key_length = 0;
-    int amount_length = 0;
+    char **tokens = tokenize(received_message, message_size, ":");
 
-    // get length of the key
-    for (int i = 4; i < message_length; ++i) {
-        if (received_message[i] == delimiter) break;
-        key_length += 1;
-    }
+    request->command = tokens[0];
+    
+    char *key = tokens[2];
+    int amount = atoi(tokens[4]);
 
-    key = substring(received_message, 5, key_length);
+    request->keyValuePair = createKeyValuePair(key, createValue(amount));
 
-    // get length of the amount
-
-    amount_length = message_length - 5 - key_length - 7;
-
-    amount = atoi(substring(received_message, 5 + key_length + 8, amount_length));
-
-    return createKeyValuePair(key, createValue(amount));
+    return request;
 }
 
-int handleMessageReception(char *message, int client_socket, store_t *store) {
+int handleMessageReception(char *message, int message_size,int client_socket, store_t *store) {
     if (strcmp(message, "exit") == 0) {
         close(client_socket);
-        return -1;
+        return -3;
     } else {
-        key_value_pair_t *keyValuePair = parseClientMessage(message, strlen(message), ':');
-        addItem(keyValuePair->key, keyValuePair->value->nb_items, store);
+        request_t *request = parseClientMessage(message, message_size);
+        const char *key = request->keyValuePair->key;
+        value_t *value = request->keyValuePair->value;
 
-        printf("[+] Message from client: 'I want you to add %d items of type '%s''\n",
-               keyValuePair->value->nb_items, keyValuePair->key);
+        if (strcmp(request->command, "increaseCountOfItem") == 0) {
+            if (increaseCountOfItem(key, value->nb_items, store) == -1) {
+                return UNABLE_TO_INCREASE_COUNT_ERROR;
+            }
+        } else if (strcmp(request->command, "writeItemToStore") == 0) {
+            writeItemToStore(key, value->nb_items, store);
+        }
     }
     return 0;
 }
 
 int talkToClient(unsigned int client_port, store_t *store) {
-    char message_to_receive[100] = {0};
+    char message_to_receive[100];
 
     int socket = createServerSocket();
     bindCreatedSocket(socket, client_port);
-    listen(socket, 5);
+    listen(socket, 90);
 
     while (1) {
         memset(message_to_receive, 0, sizeof(message_to_receive));
@@ -101,7 +109,13 @@ int talkToClient(unsigned int client_port, store_t *store) {
             return -1;
         }
 
-        if (handleMessageReception(message_to_receive, client_socket, store) == -1) break;
+        int message_handling_status = handleMessageReception(message_to_receive, sizeof(message_to_receive), client_socket, store);
+
+        if (message_handling_status == DISCONNECT) break;
+        else if (message_handling_status == UNABLE_TO_INCREASE_COUNT_ERROR) {
+            printf("[-] Some shop was unable to increase the count of an item\n");
+            continue;
+        }
 
     }
 

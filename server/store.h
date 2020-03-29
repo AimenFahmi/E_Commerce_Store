@@ -24,6 +24,7 @@ void initializeStore(int size, store_t *store);
 store_t *createStore();
 void displayStore(store_t *store);
 int requestItem(const char *itemName, int amount, store_t *store);
-void addItem(const char *itemName, int amount, store_t *store);
+int increaseCountOfItem(const char *itemName, int amount, store_t *store);
+int writeItemToStore(const char *itemName, int amount, store_t *store);
 
 #endif //E_COMMERCE_STORE_STORE_H
