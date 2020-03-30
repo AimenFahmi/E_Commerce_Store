@@ -15,8 +15,10 @@
 
 #define UNABLE_TO_INCREASE_COUNT_ERROR -2
 #define DISCONNECT -3
+#define UNABLE_TO_BUY_ITEM_ERROR -4
 
 
+// Tokenizes the string according to the delimiter and returns an array containing all the tokens
 char **tokenize(char *string, int string_size, char *delimiter) {
     int number_of_tokens = 0;
     char *temp_string_1 = malloc(string_size);
@@ -48,6 +50,9 @@ char **tokenize(char *string, int string_size, char *delimiter) {
     return tokens;
 }
 
+
+// Returns the clients message in the form of a struct containing all the attributes of the message
+// It is important to note that this function does not check whether the message is in the correct form or not !
 request_t *parseClientMessage(char *received_message, int message_size) {
 
     request_t *request = malloc(sizeof(request_t));
@@ -65,6 +70,8 @@ request_t *parseClientMessage(char *received_message, int message_size) {
     return request;
 }
 
+
+// Parses the clients messages and takes the actual actions requested by the client
 int handleMessageReception(char *message, int message_size,int client_socket, store_t *store) {
     if (strcmp(message, "exit") == 0) {
         close(client_socket);
@@ -77,14 +84,28 @@ int handleMessageReception(char *message, int message_size,int client_socket, st
         if (strcmp(request->command, "increaseCountOfItem") == 0) {
             if (increaseCountOfItem(key, value->nb_items, store) == -1) {
                 return UNABLE_TO_INCREASE_COUNT_ERROR;
+            } else {
+                printf("[+] Count of item %s has been increased by %d", key, value->nb_items);
             }
+
         } else if (strcmp(request->command, "writeItemToStore") == 0) {
             writeItemToStore(key, value->nb_items, store);
+            printf("[+] %d items of type '%s' have been written to the store\n", value->nb_items, key);
+
+        } else if (strcmp(request->command, "requestToBuyItem") == 0) {
+            if (requestItem(key, value->nb_items, store) == -1) {
+                return UNABLE_TO_BUY_ITEM_ERROR;
+            } else {
+                printf("[+] %d items of type '%s' have been bought from the store\n", value->nb_items, key);
+            }
+
         }
     }
     return 0;
 }
 
+
+// Enables the server to listen to client requests and perform the corresponding actions
 int talkToClient(unsigned int client_port, store_t *store) {
     char message_to_receive[100];
 
@@ -111,15 +132,19 @@ int talkToClient(unsigned int client_port, store_t *store) {
 
         int message_handling_status = handleMessageReception(message_to_receive, sizeof(message_to_receive), client_socket, store);
 
-        if (message_handling_status == DISCONNECT) break;
-        else if (message_handling_status == UNABLE_TO_INCREASE_COUNT_ERROR) {
+        if (message_handling_status == DISCONNECT) {
+            printf("[+] Server has become disconnected\n");
+            break;
+        } else if (message_handling_status == UNABLE_TO_INCREASE_COUNT_ERROR) {
             printf("[-] Some shop was unable to increase the count of an item\n");
+            continue;
+        } else if (message_handling_status == UNABLE_TO_BUY_ITEM_ERROR) {
+            printf("[-] Some shop was unable to buy an item\n");
             continue;
         }
 
     }
 
-    printf("[+] Server has become disconnected\n");
     return 0;
 }
 

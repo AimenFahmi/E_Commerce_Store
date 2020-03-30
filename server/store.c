@@ -47,12 +47,12 @@ store_t *createStore() {
 
 
 // Quite lazy way of implementing it, but shouldn't need much more performance
-// If there are enough items (the requested amount) the method returns 0
+// If there are enough items (the requested amount) the method returns 0 and reduces the count of the item by the "amount"
 // Otherwise it returns -1
 int requestItem(const char *itemName, int amount, store_t *store) {
     value_t *value = getValue(itemName, store->stock);
 
-    if (value->nb_items - amount > 0) {
+    if (value->nb_items - amount >= 0) {
         value->nb_items -= amount;
         add(itemName, value, store->stock);
         return 0;

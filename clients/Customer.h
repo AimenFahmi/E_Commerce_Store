@@ -5,4 +5,6 @@
 #ifndef E_COMMERCE_STORE_CUSTOMER_H
 #define E_COMMERCE_STORE_CUSTOMER_H
 
+int requestServerToWriteItemToStore(const char *item_name, const char *amount, int server_port);
+
 #endif //E_COMMERCE_STORE_CUSTOMER_H
