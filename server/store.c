@@ -52,6 +52,10 @@ store_t *createStore() {
 int requestItem(const char *itemName, int amount, store_t *store) {
     value_t *value = getValue(itemName, store->stock);
 
+    if (value == NULL) {
+        return -1;
+    }
+
     if (value->nb_items - amount >= 0) {
         value->nb_items -= amount;
         add(itemName, value, store->stock);

@@ -46,10 +46,12 @@ int receiveResponse(int socket, char *to_store_response, int response_length) {
 
 int talkToServer(unsigned int server_port, char *message_to_send, int message_length) {
     int socket = createClientSocket();
+    int error_flag = 0;
 
     if (socket == -1) {
         printf("[-] Socket creation failed\n");
-        return -1;
+        error_flag = -1;
+        goto close;
     } else {
         printf("[+] Socket has been created\n");
     }
@@ -58,7 +60,8 @@ int talkToServer(unsigned int server_port, char *message_to_send, int message_le
 
     if (connection_status < 0) {
         printf("[-] Connection to server on port %d failed\n", server_port);
-        return -1;
+        error_flag = -1;
+        goto close;
     } else {
         printf("[+] Client successfully connected to the server on port %d\n", server_port);
     }
@@ -67,12 +70,21 @@ int talkToServer(unsigned int server_port, char *message_to_send, int message_le
 
     if (sending_status < 0) {
         printf("[-] Client was unable to send message: '%s'", message_to_send);
+        error_flag = -1;
+        goto close;
     }
 
-    close(socket);
+    char buffer[10];
+    recv(socket, buffer, sizeof(buffer), 0);
+
+    if (buffer[0] == '1') {
+        error_flag = -2;
+    }
+
+    close: close(socket);
     shutdown(socket,0);
     shutdown(socket,1);
     shutdown(socket,2);
 
-    return 0;
+    return error_flag;
 }

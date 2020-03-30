@@ -44,9 +44,13 @@ int requestServerToBuyItem(const char *item_name, const char *amount, int server
 
     int talking_status = talkToServer(server_port, message_to_send, sizeof(message_to_send));
 
-    if (talking_status < 0) {
-        printf("[-] Client was unable to talk to server on port %d and therefore, unable to buy item '%s' from the store", server_port, item_name);
+    if (talking_status == -1) {
+        printf("[-] Client was unable to talk to server on port %d and therefore, "
+               "unable to buy item '%s' from the store (This is due to a failed connection to the server)\n", server_port, item_name);
         return -1;
+    } else if (talking_status == -2) {
+        printf("[-] Client was unable to buy item '%s' from the store because the latter doesn't have enough of that item\n", item_name);
+        return -2;
     }
 
     return 0;
@@ -55,7 +59,12 @@ int requestServerToBuyItem(const char *item_name, const char *amount, int server
 int main() {
     int server_port = 9005;
 
-    requestServerToBuyItem("chocolate cake", "2", server_port);
+    while (requestServerToBuyItem("chocolate cake", "2", server_port) == 0) {
+        sleep(1);
+    }
+
+    requestServerToWriteItemToStore("fanta", "6", server_port);
+
     talkToServer(server_port, "exit", sizeof("exit"));
     
 }

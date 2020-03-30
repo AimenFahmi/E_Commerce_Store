@@ -166,6 +166,8 @@ void printHashTable(hash_table_t *hashTable) {
                 if (entry->value->nb_items != VALUE_AFTER_REMOVAL) {
                     printf("%s -> ", entry->key);
                     printValue(entry->value);
+                } else {
+                    printf("%s -> removed", entry->key);
                 }
                 entry = entry->next;
             }
