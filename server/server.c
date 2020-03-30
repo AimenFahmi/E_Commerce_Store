@@ -13,13 +13,6 @@
 #include "../util/server_utilities/ServerUtilities.h"
 #include "../util/exception_handling/Failure.h"
 
-#define UNABLE_TO_INCREASE_COUNT_ERROR -2
-#define DISCONNECT -3
-#define UNABLE_TO_BUY_ITEM_ERROR -4
-
-#define PROBLEM "1"
-#define SUCCESS "0"
-
 
 // Tokenizes the string according to the delimiter and returns an array containing all the tokens
 char **tokenize(char *string, int string_size, char *delimiter) {
@@ -91,7 +84,7 @@ int handleMessageReception(char *message, int message_size,int client_socket, st
                        "because the count of that item is already too big\n", client_socket, key, value->nb_items);
                 return UNABLE_TO_INCREASE_COUNT_ERROR;
             } else {
-                printf("[+] Count of item %s has been increased by %d", key, value->nb_items);
+                printf("[+] Count of item %s has been increased by %d\n", key, value->nb_items);
             }
 
         } else if (strcmp(request->command, "writeItemToStore") == 0) {

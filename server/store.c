@@ -66,6 +66,8 @@ int requestItem(const char *itemName, int amount, store_t *store) {
 }
 
 
+// Write the key & value pair to the store
+// If the key already exists, it overwrites its value
 int writeItemToStore(const char *itemName, int amount, store_t *store) {
     add(itemName, createValue(amount), store->stock);
 }

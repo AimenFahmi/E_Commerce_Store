@@ -28,9 +28,8 @@ int requestServerToIncreaseCountOfItem(const char *item_name, const char *amount
 
     if (talking_status < 0) {
         printf("[-] Client was unable to talk to server at port %d", server_port);
-    } else if (strcmp(message_to_send, "exit") == 0) {
-        printf("[+] Connection terminated\n");
     }
+
     return 0;
 }
 

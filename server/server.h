@@ -10,6 +10,13 @@
 
 /** data **/
 
+#define UNABLE_TO_INCREASE_COUNT_ERROR -2
+#define DISCONNECT -3
+#define UNABLE_TO_BUY_ITEM_ERROR -4
+
+#define PROBLEM "1"
+#define SUCCESS "0"
+
 typedef struct {
     char *command;
     key_value_pair_t *keyValuePair;

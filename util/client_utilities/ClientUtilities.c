@@ -44,6 +44,8 @@ int receiveResponse(int socket, char *to_store_response, int response_length) {
     return recv(socket, to_store_response, response_length, 0);
 }
 
+
+// Enables the client to send messages to the server and get back acknowledgments
 int talkToServer(unsigned int server_port, char *message_to_send, int message_length) {
     int socket = createClientSocket();
     int error_flag = 0;
