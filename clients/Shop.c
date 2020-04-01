@@ -26,7 +26,7 @@ int requestServerToIncreaseCountOfItem(const char *item_name, const char *amount
 
     int talking_status = talkToServer(server_port, message_to_send, sizeof(message_to_send));
 
-    if (talking_status < 0) {
+    if (talking_status == -1) {
         printf("[-] Client was unable to talk to server at port %d", server_port);
     }
 
