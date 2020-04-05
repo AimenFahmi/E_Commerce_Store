@@ -1,0 +1,6 @@
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_Customer.dir
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_server.dir
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_Shop.dir
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_main.dir

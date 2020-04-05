@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/clients/Customer.c
+Customer.h
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/clients/Customer.h
+../util/client_utilities/ClientUtilities.h
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/client_utilities/ClientUtilities.h
+stdlib.h
+-
+stdio.h
+-
+unistd.h
+-
+sys/socket.h
+-
+string.h
+-
+
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/clients/Customer.h
+
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/client_utilities/ClientUtilities.h
+

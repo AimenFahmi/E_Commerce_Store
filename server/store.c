@@ -13,10 +13,10 @@
 const char *getRandomItemName() {
     // 31 item choice
     const char *items[] = {"socks", "trainers", "tv", "computers", "bicycles", "Iphone X", "toilet paper", "Samsung Galaxy 10",
-                     "noodles", "milk", "bread", "chocolate cake", "vanilla cake", "chocolate biscuits", "red bull",
-                     "coca cola", "fanta", "ice tea", "lemon juice", "evian water", "walser water", "ramseier classic",
-                     "ramseier shorlei", "chocolate milk", "chocolate yogurt", "vanilla yogurt", "cottage cheese",
-                     "hot pepper sauce", "hot chili sauce", "white bread"};
+                "noodles", "milk", "bread", "chocolate cake", "vanilla cake", "chocolate biscuits", "red bull",
+                "coca cola", "fanta", "ice tea", "lemon juice", "evian water", "walser water", "ramseier classic",
+                "ramseier shorlei", "chocolate milk", "chocolate yogurt", "vanilla yogurt", "cottage cheese",
+                "hot pepper sauce", "hot chili sauce", "white bread"};
 
     return items[rand()%30];
 }

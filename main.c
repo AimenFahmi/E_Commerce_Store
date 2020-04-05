@@ -3,7 +3,7 @@
 #include "server/store.h"
 #include "util/server_utilities/ServerUtilities.h"
 
-int main() {
+int main() {/*
     // Creating and initializing the store randomly after every execution
     store_t *store = createStore();
 
@@ -25,7 +25,7 @@ int main() {
     else printf("\n\nRequest was unsuccessful");
 
 
-    displayStore(store);
+    displayStore(store);*/
 
     return 0;
 }

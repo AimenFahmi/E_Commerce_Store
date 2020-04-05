@@ -106,7 +106,7 @@ int handleMessageReception(char *message, int message_size,int client_socket, st
 
 
 // Enables the server to listen to client requests and perform the corresponding actions
-int talkToClient(unsigned int client_port, store_t *store) {
+int talkToClients(unsigned int client_port, store_t *store) {
     char message_to_receive[100];
 
     int socket = createServerSocket();
@@ -153,7 +153,7 @@ int main() {
 
     displayStore(store);
 
-    talkToClient(9005, store);
+    talkToClients(9005, store);
 
     displayStore(store);
 
