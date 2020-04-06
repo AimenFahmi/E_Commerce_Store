@@ -54,8 +54,6 @@ int talkToServer(unsigned int server_port, char *message_to_send, int message_le
         printf("[-] Socket creation failed\n");
         error_flag = -1;
         goto close;
-    } else {
-        printf("[+] Socket has been created\n");
     }
 
     int connection_status = connectToServer(socket, server_port);
@@ -64,8 +62,6 @@ int talkToServer(unsigned int server_port, char *message_to_send, int message_le
         printf("[-] Connection to server on port %d failed\n", server_port);
         error_flag = -1;
         goto close;
-    } else {
-        printf("[+] Client successfully connected to the server on port %d\n", server_port);
     }
 
     int sending_status = sendRequest(socket, message_to_send, message_length);
@@ -79,9 +75,7 @@ int talkToServer(unsigned int server_port, char *message_to_send, int message_le
     char buffer[10];
     recv(socket, buffer, sizeof(buffer), 0);
 
-    if (buffer[0] == '1') {
-        error_flag = -2;
-    }
+    error_flag = atoi(buffer);
 
     close: close(socket);
     shutdown(socket,0);

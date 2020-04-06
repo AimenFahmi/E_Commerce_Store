@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/server/store.c" "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_main.dir/server/store.c.o"
   "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/client_utilities/ClientUtilities.c" "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_main.dir/util/client_utilities/ClientUtilities.c.o"
   "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/exception_handling/Failure.c" "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_main.dir/util/exception_handling/Failure.c.o"
+  "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/CommunicationProtocol.c" "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_main.dir/util/random_utilities/CommunicationProtocol.c.o"
   "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/RandomUtilities.c" "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_main.dir/util/random_utilities/RandomUtilities.c.o"
   "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/server_utilities/ServerUtilities.c" "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_main.dir/util/server_utilities/ServerUtilities.c.o"
   )

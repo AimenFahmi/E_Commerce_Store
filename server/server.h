@@ -10,23 +10,21 @@
 
 /** data **/
 
-#define UNABLE_TO_INCREASE_COUNT_ERROR -2
-#define DISCONNECT -3
-#define UNABLE_TO_BUY_ITEM_ERROR -4
-
-#define PROBLEM "1"
-#define SUCCESS "0"
+#define SERVER_DISCONNECT -1
 
 typedef struct {
     char *command;
     key_value_pair_t *keyValuePair;
 } request_t;
 
+store_t *store;
+
 /** functions **/
 
-int talkToClients(unsigned int client_port, store_t *store);
-int handleMessageReception(char *message, int message_size,int client_socket, store_t *store);
+int talkToClients();
+int handleMessageReception(char *message, int message_size,int client_socket);
 request_t *parseClientMessage(char *received_message, int message_size);
 char **tokenize(char *string, int string_size, char *delimiter);
+void sendAcknowledgment(int client_socket, char *acknowledgment, int acknowledgment_size);
 
 #endif //E_COMMERCE_STORE_SERVER_H

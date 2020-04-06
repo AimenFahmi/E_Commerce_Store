@@ -113,7 +113,6 @@ value_t *getValue(const char *key, hash_table_t *hashTable) {
     key_value_pair_t *entry = hashTable->entries[index];
 
     if (entry == NULL) {
-        printf("[-] Item '%s' does not exit\n", key);
         return NULL;
     }
 

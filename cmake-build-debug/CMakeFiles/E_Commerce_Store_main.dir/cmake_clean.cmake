@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/E_Commerce_Store_main.dir/util/client_utilities/ClientUtilities.c.o"
   "CMakeFiles/E_Commerce_Store_main.dir/util/server_utilities/ServerUtilities.c.o"
   "CMakeFiles/E_Commerce_Store_main.dir/util/random_utilities/RandomUtilities.c.o"
+  "CMakeFiles/E_Commerce_Store_main.dir/util/random_utilities/CommunicationProtocol.c.o"
   "E_Commerce_Store_main.pdb"
   "E_Commerce_Store_main"
 )

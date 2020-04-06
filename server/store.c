@@ -53,7 +53,7 @@ int requestItem(const char *itemName, int amount, store_t *store) {
     value_t *value = getValue(itemName, store->stock);
 
     if (value == NULL) {
-        return -1;
+        return -2;
     }
 
     if (value->nb_items - amount >= 0) {

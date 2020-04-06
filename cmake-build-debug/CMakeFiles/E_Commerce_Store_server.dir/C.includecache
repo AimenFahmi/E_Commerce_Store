@@ -27,6 +27,8 @@ unistd.h
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/server_utilities/ServerUtilities.h
 ../util/exception_handling/Failure.h
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/exception_handling/Failure.h
+../util/random_utilities/CommunicationProtocol.h
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/CommunicationProtocol.h
 
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/server/server.h
 ../hash_table/HashTable.h
@@ -43,6 +45,8 @@ stdlib.h
 -
 
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/exception_handling/Failure.h
+
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/CommunicationProtocol.h
 
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/server_utilities/ServerUtilities.h
 

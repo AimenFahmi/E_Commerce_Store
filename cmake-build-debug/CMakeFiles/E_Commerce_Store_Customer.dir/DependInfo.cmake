@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/clients/Customer.c" "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_Customer.dir/clients/Customer.c.o"
   "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/client_utilities/ClientUtilities.c" "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_Customer.dir/util/client_utilities/ClientUtilities.c.o"
   "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/exception_handling/Failure.c" "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_Customer.dir/util/exception_handling/Failure.c.o"
+  "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/CommunicationProtocol.c" "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/CommunicationProtocol.c.o"
   "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/RandomUtilities.c" "/Users/aimenfahmi/CLionProjects/E_Commerce_Store/cmake-build-debug/CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/RandomUtilities.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")

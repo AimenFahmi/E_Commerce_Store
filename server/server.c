@@ -12,6 +12,7 @@
 
 #include "../util/server_utilities/ServerUtilities.h"
 #include "../util/exception_handling/Failure.h"
+#include "../util/random_utilities/CommunicationProtocol.h"
 
 
 // Tokenizes the string according to the delimiter and returns an array containing all the tokens
@@ -67,81 +68,110 @@ request_t *parseClientMessage(char *received_message, int message_size) {
 }
 
 
+void sendAcknowledgment(int client_socket, char *acknowledgment, int acknowledgment_size) {
+    send(client_socket, acknowledgment, acknowledgment_size, 0);
+}
+
 // Parses the clients messages and takes the actual actions requested by the client
-int handleMessageReception(char *message, int message_size,int client_socket, store_t *store) {
+int handleMessageReception(char *message, int message_size,int client_socket) {
     if (strcmp(message, "exit") == 0) {
         printf("[+] Server has become disconnected\n");
-        close(client_socket);
-        return -3;
+        return SERVER_DISCONNECT;
     } else {
         request_t *request = parseClientMessage(message, message_size);
         const char *key = request->keyValuePair->key;
         value_t *value = request->keyValuePair->value;
 
         if (strcmp(request->command, "increaseCountOfItem") == 0) {
+
             if (increaseCountOfItem(key, value->nb_items, store) == -1) {
                 printf("[-] Shop %d was unable to increase the count of item '%s' by %d "
                        "because the count of that item is already too big\n", client_socket, key, value->nb_items);
-                return UNABLE_TO_INCREASE_COUNT_ERROR;
+                sendAcknowledgment(client_socket, ITEM_COUNT_INCREASE_FAILURE, sizeof(ITEM_COUNT_INCREASE_FAILURE));
+                return 0;
             } else {
+                sendAcknowledgment(client_socket, ITEM_COUNT_INCREASE_SUCCESS, sizeof(ITEM_COUNT_INCREASE_SUCCESS));
                 printf("[+] Count of item %s has been increased by %d\n", key, value->nb_items);
             }
 
         } else if (strcmp(request->command, "writeItemToStore") == 0) {
             writeItemToStore(key, value->nb_items, store);
+            sendAcknowledgment(client_socket, ITEM_WRITING_SUCCESS, sizeof(ITEM_WRITING_SUCCESS));
             printf("[+] %d items of type '%s' have been written to the store\n", value->nb_items, key);
 
         } else if (strcmp(request->command, "requestToBuyItem") == 0) {
-            if (requestItem(key, value->nb_items, store) == -1) {
+            int request_status = requestItem(key, value->nb_items, store);
+            if (request_status == -1) {
                 printf("[-] Customer %d was unable to buy item '%s' due to a lack of that item in the store\n", client_socket, key);
-                return UNABLE_TO_BUY_ITEM_ERROR;
+                sendAcknowledgment(client_socket, ITEM_BUYING_FAILURE, sizeof(ITEM_BUYING_FAILURE));
+                return 0;
+            } else if (request_status == -2) {
+                printf("[-] Customer %d was unable to buy item '%s' because it doesn't exist in the store\n", client_socket, key);
+                sendAcknowledgment(client_socket, ITEM_DOESNT_EXIST, sizeof(ITEM_DOESNT_EXIST));
             } else {
                 printf("[+] %d items of type '%s' have been bought from the store\n", value->nb_items, key);
+                sendAcknowledgment(client_socket, ITEM_BUYING_SUCCESS, sizeof(ITEM_BUYING_SUCCESS));
             }
 
         }
     }
+
     return 0;
 }
 
-
-// Enables the server to listen to client requests and perform the corresponding actions
-int talkToClients(unsigned int client_port, store_t *store) {
+// Executes the clients request and sends an acknowledgment
+void * handleConnection(void *p_client_socket) {
     char message_to_receive[100];
+    int *return_value = malloc(sizeof(int));
+    memset(message_to_receive, 0, sizeof(message_to_receive));
 
-    int socket = createServerSocket();
-    bindCreatedSocket(socket, client_port);
-    listen(socket, 90);
+    int client_socket = * ((int *) p_client_socket);
 
     while (1) {
-        memset(message_to_receive, 0, sizeof(message_to_receive));
-
-        int client_socket = accept(socket, NULL, NULL);
-
-        if (client_socket < 0) {
-            printf("[-] Could not accept client on port %d\n", client_port);
-            return -1;
-        }
-
         int message_reception_status = recv(client_socket, message_to_receive, sizeof(message_to_receive), 0);
 
         if (message_reception_status < 0) {
-            printf("[-] Could not receive message from client on port %d\n", client_port);
+            printf("[-] Could not receive message from client on port %d\n", PORT);
+            *return_value = -1;
+            return return_value;
+        }
+
+        if (strcmp(message_to_receive, "exit") == 0) {
+            *return_value = SERVER_DISCONNECT;
+            break;
+        }
+
+        *return_value = handleMessageReception(message_to_receive, sizeof(message_to_receive), client_socket);
+
+    }
+
+    return return_value;
+}
+
+// Enables the server to listen to client requests and perform the corresponding actions
+int talkToClients() {
+
+    int socket = createServerSocket();
+    bindCreatedSocket(socket, PORT);
+    listen(socket, 90);
+
+    printf("[+] Waiting for connections...\n");
+
+    while (1) {
+        int * client_socket = malloc(sizeof(int));
+        *client_socket = accept(socket, NULL, NULL);
+
+        if (client_socket < 0) {
+            printf("[-] Could not accept client on port %d\n", PORT);
             return -1;
         }
 
-        int message_handling_status = handleMessageReception(message_to_receive, sizeof(message_to_receive), client_socket, store);
-
-        // Sending the right acknowledgments to the client
-        if (message_handling_status == DISCONNECT) {
+        if (* ((int *) handleConnection(client_socket)) == SERVER_DISCONNECT) {
+            close(*client_socket);
+            close(socket);
+            free(client_socket);
             break;
-        } else if (message_handling_status == UNABLE_TO_INCREASE_COUNT_ERROR) {
-            send(client_socket, PROBLEM, sizeof(PROBLEM), 0);
-        } else if (message_handling_status == UNABLE_TO_BUY_ITEM_ERROR) {
-            send(client_socket, PROBLEM, sizeof(PROBLEM), 0);
         }
-
-        send(client_socket, SUCCESS, sizeof(SUCCESS), 0);
     }
 
     return 0;
@@ -149,11 +179,11 @@ int talkToClients(unsigned int client_port, store_t *store) {
 
 int main() {
 
-    store_t *store = createStore();
+    store = createStore();
 
     displayStore(store);
 
-    talkToClients(9005, store);
+    talkToClients();
 
     displayStore(store);
 

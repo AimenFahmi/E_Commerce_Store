@@ -15,13 +15,14 @@
 // Returns descriptor of the socket if successfully created.
 // Else, returns -1;
 int createServerSocket() {
+    int iSetOption = 1;
     int newSocket = socket(AF_INET, SOCK_STREAM, 0);
+    setsockopt(newSocket, SOL_SOCKET, SO_REUSEADDR, (char*)&iSetOption,
+               sizeof(iSetOption));
 
     if (newSocket == -1) {
         printf("[-] Socket creation failed\n");
         exit(-1);
-    } else {
-        printf("[+] Socket has been created\n");
     }
     return newSocket;
 }
@@ -38,8 +39,6 @@ int bindCreatedSocket(int socket, unsigned int client_port) {
     if (binding_status < 0) {
         printf("[-] Binding to client port %d failed\n", client_port);
         exit(-1);
-    } else {
-        printf("[+] Server successfully bound to the client on port %d\n", client_port);
     }
 
     return binding_status;

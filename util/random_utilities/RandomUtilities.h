@@ -12,5 +12,6 @@
 #define TOO_LONG 2
 
 int getLine (char *prompt, char *buff, size_t sz);
+int msleep(long msec);
 
 #endif //E_COMMERCE_STORE_RANDOMUTILITIES_H

@@ -399,6 +399,42 @@ util/exception_handling/Failure.c.s:
 	$(MAKE) -f CMakeFiles/E_Commerce_Store_main.dir/build.make CMakeFiles/E_Commerce_Store_main.dir/util/exception_handling/Failure.c.s
 .PHONY : util/exception_handling/Failure.c.s
 
+util/random_utilities/CommunicationProtocol.o: util/random_utilities/CommunicationProtocol.c.o
+
+.PHONY : util/random_utilities/CommunicationProtocol.o
+
+# target to build an object file
+util/random_utilities/CommunicationProtocol.c.o:
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_Customer.dir/build.make CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/CommunicationProtocol.c.o
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_server.dir/build.make CMakeFiles/E_Commerce_Store_server.dir/util/random_utilities/CommunicationProtocol.c.o
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_Shop.dir/build.make CMakeFiles/E_Commerce_Store_Shop.dir/util/random_utilities/CommunicationProtocol.c.o
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_main.dir/build.make CMakeFiles/E_Commerce_Store_main.dir/util/random_utilities/CommunicationProtocol.c.o
+.PHONY : util/random_utilities/CommunicationProtocol.c.o
+
+util/random_utilities/CommunicationProtocol.i: util/random_utilities/CommunicationProtocol.c.i
+
+.PHONY : util/random_utilities/CommunicationProtocol.i
+
+# target to preprocess a source file
+util/random_utilities/CommunicationProtocol.c.i:
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_Customer.dir/build.make CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/CommunicationProtocol.c.i
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_server.dir/build.make CMakeFiles/E_Commerce_Store_server.dir/util/random_utilities/CommunicationProtocol.c.i
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_Shop.dir/build.make CMakeFiles/E_Commerce_Store_Shop.dir/util/random_utilities/CommunicationProtocol.c.i
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_main.dir/build.make CMakeFiles/E_Commerce_Store_main.dir/util/random_utilities/CommunicationProtocol.c.i
+.PHONY : util/random_utilities/CommunicationProtocol.c.i
+
+util/random_utilities/CommunicationProtocol.s: util/random_utilities/CommunicationProtocol.c.s
+
+.PHONY : util/random_utilities/CommunicationProtocol.s
+
+# target to generate assembly for a file
+util/random_utilities/CommunicationProtocol.c.s:
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_Customer.dir/build.make CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/CommunicationProtocol.c.s
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_server.dir/build.make CMakeFiles/E_Commerce_Store_server.dir/util/random_utilities/CommunicationProtocol.c.s
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_Shop.dir/build.make CMakeFiles/E_Commerce_Store_Shop.dir/util/random_utilities/CommunicationProtocol.c.s
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_main.dir/build.make CMakeFiles/E_Commerce_Store_main.dir/util/random_utilities/CommunicationProtocol.c.s
+.PHONY : util/random_utilities/CommunicationProtocol.c.s
+
 util/random_utilities/RandomUtilities.o: util/random_utilities/RandomUtilities.c.o
 
 .PHONY : util/random_utilities/RandomUtilities.o
@@ -501,6 +537,9 @@ help:
 	@echo "... util/exception_handling/Failure.o"
 	@echo "... util/exception_handling/Failure.i"
 	@echo "... util/exception_handling/Failure.s"
+	@echo "... util/random_utilities/CommunicationProtocol.o"
+	@echo "... util/random_utilities/CommunicationProtocol.i"
+	@echo "... util/random_utilities/CommunicationProtocol.s"
 	@echo "... util/random_utilities/RandomUtilities.o"
 	@echo "... util/random_utilities/RandomUtilities.i"
 	@echo "... util/random_utilities/RandomUtilities.s"

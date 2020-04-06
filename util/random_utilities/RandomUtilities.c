@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
+#include <errno.h>
 
 // Will be useful if we want the clients to be able to access the server via a prompt on the terminal
 int getLine (char *prompt, char *buff, size_t sz) {
@@ -32,4 +34,25 @@ int getLine (char *prompt, char *buff, size_t sz) {
     // Otherwise remove newline and give string back to caller.
     buff[strlen(buff)-1] = '\0';
     return OK;
+}
+
+// Enables threads to sleep in milliseconds
+int msleep(long msec) {
+    struct timespec ts;
+    int res;
+
+    if (msec < 0)
+    {
+        errno = EINVAL;
+        return -1;
+    }
+
+    ts.tv_sec = msec / 1000;
+    ts.tv_nsec = (msec % 1000) * 1000000;
+
+    do {
+        res = nanosleep(&ts, &ts);
+    } while (res && errno == EINTR);
+
+    return res;
 }
