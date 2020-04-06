@@ -240,9 +240,9 @@
     </configuration>
     <list>
       <item itemvalue="CMake Application.E_Commerce_Store_Customer" />
-      <item itemvalue="CMake Application.E_Commerce_Store_Shop" />
       <item itemvalue="CMake Application.E_Commerce_Store_main" />
       <item itemvalue="CMake Application.E_Commerce_Store_server" />
+      <item itemvalue="CMake Application.E_Commerce_Store_Shop" />
     </list>
   </component>
   <component name="SvnConfiguration">
