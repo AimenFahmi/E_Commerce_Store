@@ -5,6 +5,6 @@
 #ifndef E_COMMERCE_STORE_SHOP_H
 #define E_COMMERCE_STORE_SHOP_H
 
-int requestServerToIncreaseCountOfItem(const char *item_name, const char *amount, int server_port);
+int requestServerToIncreaseCountOfItem(const char *item_name, const char *amount, int client_socket);
 
 #endif //E_COMMERCE_STORE_SHOP_H

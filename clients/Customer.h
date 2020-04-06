@@ -7,12 +7,10 @@
 
 /** functions **/
 
-void interactiveMode(void);
-void automaticMode(void);
+void interactiveMode(int client_socket);
+void automaticMode(int client_socket);
 void handleConnection(int mode);
-int writingRequest(const char *item_name, const char *amount, int client_socket);
-int buyingRequest(const char *item_name, const char *amount, int client_socket);
-int requestServerToWriteItemToStore(const char *item_name, const char *amount, int server_port);
-int requestServerToBuyItem(const char *item_name, const char *amount, int server_port);
+int requestServerToWriteItem(const char *item_name, const char *amount, int client_socket);
+int requestServerToBuyItem(const char *item_name, const char *amount, int client_socket);
 
 #endif //E_COMMERCE_STORE_CUSTOMER_H

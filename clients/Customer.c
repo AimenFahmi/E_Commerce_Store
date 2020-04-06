@@ -16,16 +16,17 @@
 #define INTERACTIVE_MODE 0
 #define AUTOMATIC_MODE 1
 
-void interactiveMode(void) {
+// For an interactive interaction with the server
+void interactiveMode(int client_socket) {
     char command[100];
     char item_name[100];
     char amount[100];
 
     while (1) {
-        printf("Enter command (buy / write): ");
+        printf("Enter command (buy / write / exit): ");
         getLine("", command, sizeof(command));
         if (strcmp(command, "exit") == 0) {
-            talkToServer(PORT, "exit", sizeof("exit"));
+            sendRequest(client_socket, "exit", sizeof("exit"));
             break;
         }
         printf("Enter item name: ");
@@ -34,28 +35,31 @@ void interactiveMode(void) {
         getLine("", amount, sizeof(amount));
 
         if (strcmp(command, "buy") == 0) {
-            requestServerToBuyItem(item_name, amount, PORT);
+            requestServerToBuyItem(item_name, amount, client_socket);
         } else if (strcmp(command, "write") == 0) {
-            requestServerToWriteItemToStore(item_name, amount, PORT);
+            requestServerToWriteItem(item_name, amount, client_socket);
         } else {
-            printf("You entered something wrong ! try again...\n");
+            printf("You typed something wrong ! try again...\n");
         }
     }
 }
 
-void automaticMode(void) {
+// For a scripted interaction with the server
+void automaticMode(int client_socket) {
     for (int i = 0; i < 100; ++i) {
-        msleep(i*10);
-        char count[12];
-        sprintf(count, "%d", i);
-        requestServerToWriteItemToStore("aimen", count, PORT);
+        msleep(100);
+        char amount[12];
+        sprintf(amount, "%d", i);
+        requestServerToWriteItem("aimen", amount, client_socket);
+        requestServerToBuyItem("aimen", amount, client_socket);
     }
-    talkToServer(PORT, "exit", sizeof("exit"));
+    sendRequest(client_socket, "exit", sizeof("exit"));
 }
 
-int writingRequest(const char *item_name, const char *amount, int client_socket) {
-    char message_to_send[strlen("writeItemToStore:key:") + strlen(item_name) + strlen(":") + strlen("amount:") + strlen(amount)];
-    memset(message_to_send, 0, strlen(message_to_send));
+// Sends a message to the server that looks like "writeItemToStore:key:cheese cake:amount:89"
+int requestServerToWriteItem(const char *item_name, const char *amount, int client_socket) {
+    char message_to_send[200];
+    memset(message_to_send, 0, sizeof(message_to_send));
     strcat(message_to_send, "writeItemToStore:key:");
     strcat(message_to_send, item_name);
     strcat(message_to_send, ":");
@@ -79,9 +83,10 @@ int writingRequest(const char *item_name, const char *amount, int client_socket)
     return 0;
 }
 
-int buyingRequest(const char *item_name, const char *amount, int client_socket) {
-    char message_to_send[strlen("requestToBuyItem:key:") + strlen(item_name) + strlen(":") + strlen("amount:") + strlen(amount)];
-    memset(message_to_send, 0, strlen(message_to_send));
+// Sends a message to the server that looks like "requestToBuyItem:key:cheese cake:amount:89"
+int requestServerToBuyItem(const char *item_name, const char *amount, int client_socket) {
+    char message_to_send[200];
+    memset(message_to_send, 0, sizeof(message_to_send));
     strcat(message_to_send, "requestToBuyItem:key:");
     strcat(message_to_send, item_name);
     strcat(message_to_send, ":");
@@ -107,6 +112,8 @@ int buyingRequest(const char *item_name, const char *amount, int client_socket) 
     return 0;
 }
 
+// Handles all requests coming from a specific client
+// Most important part of the customer
 void handleConnection(int mode) {
     int socket = createClientSocket();
     if (socket < 0) {
@@ -119,14 +126,9 @@ void handleConnection(int mode) {
     }
 
     if (mode == AUTOMATIC_MODE) {
-        for (int i = 0; i < 100; ++i) {
-            msleep(100);
-            char amount[12];
-            sprintf(amount, "%d", i);
-            writingRequest("aimen", amount, socket);
-            buyingRequest("aimen", amount, socket);
-        }
-        sendRequest(socket, "exit", sizeof("exit"));
+        automaticMode(socket);
+    } else if (mode == INTERACTIVE_MODE) {
+        interactiveMode(socket);
     }
 
     close: close(socket);
@@ -135,58 +137,6 @@ void handleConnection(int mode) {
     shutdown(socket,2);
 }
 
-// Message will look like: "writeItemToStore:key:cheese:amount:56"
-int requestServerToWriteItemToStore(const char *item_name, const char *amount, int server_port) {
-    char message_to_send[strlen("writeItemToStore:key:") + strlen(item_name) + strlen(":") + strlen("amount:") + strlen(amount)];
-    memset(message_to_send, 0, strlen(message_to_send));
-    strcat(message_to_send, "writeItemToStore:key:");
-    strcat(message_to_send, item_name);
-    strcat(message_to_send, ":");
-    strcat(message_to_send, "amount:");
-    strcat(message_to_send, amount);
-
-    int talking_status = talkToServer(server_port, message_to_send, sizeof(message_to_send));
-
-    if (talking_status == atoi(ITEM_WRITING_SUCCESS)) {
-        printf("[+] Client successfully wrote item '%s' with count '%s' to the store\n", item_name, amount);
-    } else if (talking_status == atoi(ITEM_WRITING_FAILURE)) {
-        printf("[-] Client was unable to write item '%s' with count '%s' to the store\n", item_name, amount);
-    } else if (talking_status == NETWORK_FAILURE) {
-        printf("[-] Client was unable to talk to server on port %d and therefore, unable to write item '%s' to the store", server_port, item_name);
-        return -1;
-    }
-
-    return 0;
-}
-
-// Message will look like "requestToBuyItem:key:cheese:amount:56"
-int requestServerToBuyItem(const char *item_name, const char *amount, int server_port) {
-    char message_to_send[strlen("requestToBuyItem:key:") + strlen(item_name) + strlen(":") + strlen("amount:") + strlen(amount)];
-    memset(message_to_send, 0, strlen(message_to_send));
-    strcat(message_to_send, "requestToBuyItem:key:");
-    strcat(message_to_send, item_name);
-    strcat(message_to_send, ":");
-    strcat(message_to_send, "amount:");
-    strcat(message_to_send, amount);
-
-    int talking_status = talkToServer(server_port, message_to_send, sizeof(message_to_send));
-
-    if (talking_status == atoi(ITEM_BUYING_SUCCESS)) {
-        printf("[+] Customer was able to buy %s pieces of item '%s'\n", amount, item_name);
-    } else if (talking_status == NETWORK_FAILURE) {
-        printf("[-] Customer was unable to talk to server on port %d and therefore, "
-               "unable to buy item '%s' from the store (This is due to a failed connection to the server)\n", server_port, item_name);
-    } else if (talking_status == atoi(ITEM_BUYING_FAILURE)) {
-        printf("[-] Customer was unable to buy %s pieces of item '%s' because the store doesn't have enough of them in stock\n", amount, item_name);
-    } else if (talking_status == atoi(ITEM_DOESNT_EXIST)) {
-        printf("[-] Customer was unable to buy %s pieces of item '%s' because the item doesn't exist in the store\n", amount, item_name);
-    }
-
-    return talking_status;
-}
-
 int main() {
-    //interactiveMode();
-    //automaticMode();
-    handleConnection(AUTOMATIC_MODE);
+    handleConnection(INTERACTIVE_MODE);
 }

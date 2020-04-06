@@ -4,12 +4,18 @@
 CMakeFiles/E_Commerce_Store_Customer.dir/clients/Customer.c.o: ../clients/Customer.c
 CMakeFiles/E_Commerce_Store_Customer.dir/clients/Customer.c.o: ../clients/Customer.h
 CMakeFiles/E_Commerce_Store_Customer.dir/clients/Customer.c.o: ../util/client_utilities/ClientUtilities.h
+CMakeFiles/E_Commerce_Store_Customer.dir/clients/Customer.c.o: ../util/random_utilities/CommunicationProtocol.h
+CMakeFiles/E_Commerce_Store_Customer.dir/clients/Customer.c.o: ../util/random_utilities/RandomUtilities.h
 
 CMakeFiles/E_Commerce_Store_Customer.dir/util/client_utilities/ClientUtilities.c.o: ../util/client_utilities/ClientUtilities.c
 CMakeFiles/E_Commerce_Store_Customer.dir/util/client_utilities/ClientUtilities.c.o: ../util/client_utilities/ClientUtilities.h
+CMakeFiles/E_Commerce_Store_Customer.dir/util/client_utilities/ClientUtilities.c.o: ../util/random_utilities/CommunicationProtocol.h
 
 CMakeFiles/E_Commerce_Store_Customer.dir/util/exception_handling/Failure.c.o: ../util/exception_handling/Failure.c
 CMakeFiles/E_Commerce_Store_Customer.dir/util/exception_handling/Failure.c.o: ../util/exception_handling/Failure.h
+
+CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/CommunicationProtocol.c.o: ../util/random_utilities/CommunicationProtocol.c
+CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/CommunicationProtocol.c.o: ../util/random_utilities/CommunicationProtocol.h
 
 CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/RandomUtilities.c.o: ../util/random_utilities/RandomUtilities.c
 CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/RandomUtilities.c.o: ../util/random_utilities/RandomUtilities.h
