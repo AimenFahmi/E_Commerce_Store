@@ -35,9 +35,9 @@ void interactiveMode(int client_socket) {
         getLine("", amount, sizeof(amount));
 
         if (strcmp(command, "buy") == 0) {
-            requestServerToBuyItem(item_name, amount, client_socket);
+            requestServerToBuyItem(item_name, amount, sizeof(item_name), sizeof(amount), client_socket);
         } else if (strcmp(command, "write") == 0) {
-            requestServerToWriteItem(item_name, amount, client_socket);
+            requestServerToWriteItem(item_name, amount, sizeof(item_name), sizeof(amount), client_socket);
         } else {
             printf("You typed something wrong ! try again...\n");
         }
@@ -50,20 +50,19 @@ void automaticMode(int client_socket) {
         msleep(100);
         char amount[12];
         sprintf(amount, "%d", i);
-        requestServerToWriteItem("aimen", amount, client_socket);
-        requestServerToBuyItem("aimen", amount, client_socket);
+        requestServerToWriteItem("aimen", amount, sizeof("aimen"), sizeof(amount), client_socket);
+        requestServerToBuyItem("aimen", amount, sizeof("aimen"), sizeof(amount), client_socket);
     }
     sendRequest(client_socket, "exit", sizeof("exit"));
 }
 
 // Sends a message to the server that looks like "writeItemToStore:key:cheese cake:amount:89"
-int requestServerToWriteItem(const char *item_name, const char *amount, int client_socket) {
-    char message_to_send[200];
-    memset(message_to_send, 0, sizeof(message_to_send));
+int requestServerToWriteItem(const char *item_name, const char *amount, int item_name_size, int amount_size, int client_socket) {
+    char message_to_send[sizeof("writeItemToStore:key:") + item_name_size + sizeof(":amount:") + amount_size];
+    memset(message_to_send, 0, strlen(message_to_send));
     strcat(message_to_send, "writeItemToStore:key:");
     strcat(message_to_send, item_name);
-    strcat(message_to_send, ":");
-    strcat(message_to_send, "amount:");
+    strcat(message_to_send, ":amount:");
     strcat(message_to_send, amount);
 
     if (sendRequest(client_socket, message_to_send, sizeof(message_to_send)) < 0) {
@@ -84,13 +83,12 @@ int requestServerToWriteItem(const char *item_name, const char *amount, int clie
 }
 
 // Sends a message to the server that looks like "requestToBuyItem:key:cheese cake:amount:89"
-int requestServerToBuyItem(const char *item_name, const char *amount, int client_socket) {
-    char message_to_send[200];
-    memset(message_to_send, 0, sizeof(message_to_send));
+int requestServerToBuyItem(const char *item_name, const char *amount, int item_name_size, int amount_size, int client_socket) {
+    char message_to_send[sizeof("requestToBuyItem:key:") + item_name_size + sizeof(":amount:") + amount_size];
+    memset(message_to_send, 0, strlen(message_to_send));
     strcat(message_to_send, "requestToBuyItem:key:");
     strcat(message_to_send, item_name);
-    strcat(message_to_send, ":");
-    strcat(message_to_send, "amount:");
+    strcat(message_to_send, ":amount:");
     strcat(message_to_send, amount);
 
     if (sendRequest(client_socket, message_to_send, sizeof(message_to_send)) < 0) {
@@ -138,5 +136,5 @@ void handleConnection(int mode) {
 }
 
 int main() {
-    handleConnection(INTERACTIVE_MODE);
+    handleConnection(AUTOMATIC_MODE);
 }
