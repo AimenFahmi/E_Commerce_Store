@@ -14,15 +14,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4628c0c8-3b82-40db-89d4-e3e3824cfb8d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients/Customer.c" beforeDir="false" afterPath="$PROJECT_DIR$/clients/Customer.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients/Customer.h" beforeDir="false" afterPath="$PROJECT_DIR$/clients/Customer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients/Shop.c" beforeDir="false" afterPath="$PROJECT_DIR$/clients/Shop.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clients/Shop.h" beforeDir="false" afterPath="$PROJECT_DIR$/clients/Shop.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_Customer.dir/clients/Customer.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_Customer.dir/clients/Customer.c.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/E_Commerce_Store_Customer" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/E_Commerce_Store_Customer" afterDir="false" />
-    </list>
+    <list default="true" id="4628c0c8-3b82-40db-89d4-e3e3824cfb8d" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +79,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clients/Shop.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-524">
+            <state relative-caret-position="1482">
               <caret line="57" column="39" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
               <folding>
                 <element signature="e#48#65#0" expanded="true" />
@@ -183,16 +175,6 @@
             <path>
               <item name="E_Commerce_Store" type="b2602c69:ProjectViewProjectNode" />
               <item name="E_Commerce_Store" type="462c0819:PsiDirectoryNode" />
-              <item name="clients" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="E_Commerce_Store" type="b2602c69:ProjectViewProjectNode" />
-              <item name="E_Commerce_Store" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="E_Commerce_Store" type="b2602c69:ProjectViewProjectNode" />
-              <item name="E_Commerce_Store" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -258,9 +240,9 @@
     </configuration>
     <list>
       <item itemvalue="CMake Application.E_Commerce_Store_Customer" />
+      <item itemvalue="CMake Application.E_Commerce_Store_Shop" />
       <item itemvalue="CMake Application.E_Commerce_Store_main" />
       <item itemvalue="CMake Application.E_Commerce_Store_server" />
-      <item itemvalue="CMake Application.E_Commerce_Store_Shop" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -282,7 +264,7 @@
       <workItem from="1585816639334" duration="3179000" />
       <workItem from="1586098437453" duration="3809000" />
       <workItem from="1586162965116" duration="4891000" />
-      <workItem from="1586172564517" duration="11709000" />
+      <workItem from="1586172564517" duration="11781000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1585395509498</created>
@@ -403,15 +385,21 @@
       <option name="project" value="LOCAL" />
       <updated>1586194212683</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="restructured on Monday 6th April">
+      <created>1586195127121</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1586195127121</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85135000" />
+    <option name="totallyTimeSpent" value="85207000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49619484" visible="true" weight="0.1959707" />
       <window_info id="Structure" order="1" sideWeight="0.50380516" side_tool="true" weight="0.1935287" />
@@ -792,7 +780,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clients/Shop.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-524">
+        <state relative-caret-position="1482">
           <caret line="57" column="39" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
           <folding>
             <element signature="e#48#65#0" expanded="true" />
