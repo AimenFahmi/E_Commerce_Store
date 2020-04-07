@@ -23,6 +23,8 @@ stdlib.h
 -
 unistd.h
 -
+pthread.h
+-
 ../util/server_utilities/ServerUtilities.h
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/server_utilities/ServerUtilities.h
 ../util/exception_handling/Failure.h

@@ -40,13 +40,12 @@ void interactiveMode(int client_socket) {
 }
 
 // For a scripted interaction with the server
-void automaticMode(int client_socket) {
-    for (int i = 0; i < 100; ++i) {
-        msleep(100);
-        char amount[12];
-        sprintf(amount, "%d", i);
-        requestServerToIncreaseCountOfItem("aimen", amount, sizeof("aimen"), sizeof(amount), client_socket);
-    }
+void automaticMode(int client_socket, int customer_id) {
+    char amount[12];
+    sprintf(amount, "%d", customer_id);
+
+    requestServerToIncreaseCountOfItem("customer", amount, sizeof("customer"), sizeof(amount), client_socket);
+
     sendRequest(client_socket, "exit", sizeof("exit"));
 }
 
@@ -78,7 +77,7 @@ int requestServerToIncreaseCountOfItem(const char *item_name, const char *amount
 
 // Handles all requests coming from a specific client
 // Most important part of the shop
-void handleConnection(int mode) {
+void handleConnection(int mode, int customer_id) {
     int socket = createClientSocket();
     if (socket < 0) {
         printf("[-] Socket creation failed\n");
@@ -90,7 +89,7 @@ void handleConnection(int mode) {
     }
 
     if (mode == AUTOMATIC_MODE) {
-        automaticMode(socket);
+        automaticMode(socket, customer_id);
     } else if (mode == INTERACTIVE_MODE) {
         interactiveMode(socket);
     }
@@ -101,7 +100,7 @@ void handleConnection(int mode) {
     shutdown(socket,2);
 }
 
-int main() {
-    handleConnection(INTERACTIVE_MODE);
+int main(int argc, char *argv[]) {
+    handleConnection(AUTOMATIC_MODE, atoi(argv[1]));
     return 0;
 }

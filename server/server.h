@@ -21,7 +21,7 @@ store_t *store;
 
 /** functions **/
 
-int talkToClients();
+void talkToClients();
 int handleMessageReception(char *message, int message_size,int client_socket);
 request_t *parseClientMessage(char *received_message, int message_size);
 char **tokenize(char *string, int string_size, char *delimiter);

@@ -7,8 +7,6 @@
 
 #include "../random_utilities/CommunicationProtocol.h"
 
-#define PORT 898989
-
 int createClientSocket();
 int connectToServer(int socket, unsigned int server_port);
 int sendRequest(int socket, char *request_message, int request_length);

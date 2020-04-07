@@ -9,11 +9,14 @@
 #include <sys/socket.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <pthread.h>
 
 #include "../util/server_utilities/ServerUtilities.h"
 #include "../util/exception_handling/Failure.h"
 #include "../util/random_utilities/CommunicationProtocol.h"
 
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mutex2 = PTHREAD_MUTEX_INITIALIZER;
 
 // Tokenizes the string according to the delimiter and returns an array containing all the tokens
 char **tokenize(char *string, int string_size, char *delimiter) {
@@ -84,7 +87,9 @@ int handleMessageReception(char *message, int message_size,int client_socket) {
 
         if (strcmp(request->command, "increaseCountOfItem") == 0) {
 
-            if (increaseCountOfItem(key, value->nb_items, store) == -1) {
+            int operation_status = increaseCountOfItem(key, value->nb_items, store);
+
+            if (operation_status == -1) {
                 printf("[-] Shop %d was unable to increase the count of item '%s' by %d "
                        "because the count of that item is already too big\n", client_socket, key, value->nb_items);
                 sendAcknowledgment(client_socket, ITEM_COUNT_INCREASE_FAILURE, sizeof(ITEM_COUNT_INCREASE_FAILURE));
@@ -96,16 +101,18 @@ int handleMessageReception(char *message, int message_size,int client_socket) {
 
         } else if (strcmp(request->command, "writeItemToStore") == 0) {
             writeItemToStore(key, value->nb_items, store);
+
             sendAcknowledgment(client_socket, ITEM_WRITING_SUCCESS, sizeof(ITEM_WRITING_SUCCESS));
             printf("[+] %d items of type '%s' have been written to the store\n", value->nb_items, key);
 
         } else if (strcmp(request->command, "requestToBuyItem") == 0) {
-            int request_status = requestItem(key, value->nb_items, store);
-            if (request_status == -1) {
+            int operation_status = requestItem(key, value->nb_items, store);
+
+            if (operation_status == -1) {
                 printf("[-] Customer %d was unable to buy item '%s' due to a lack of that item in the store\n", client_socket, key);
                 sendAcknowledgment(client_socket, ITEM_BUYING_FAILURE, sizeof(ITEM_BUYING_FAILURE));
                 return 0;
-            } else if (request_status == -2) {
+            } else if (operation_status == -2) {
                 printf("[-] Customer %d was unable to buy item '%s' because it doesn't exist in the store\n", client_socket, key);
                 sendAcknowledgment(client_socket, ITEM_DOESNT_EXIST, sizeof(ITEM_DOESNT_EXIST));
             } else {
@@ -121,11 +128,12 @@ int handleMessageReception(char *message, int message_size,int client_socket) {
 
 // Executes the clients request and sends an acknowledgment
 void * handleConnection(void *p_client_socket) {
+    int client_socket = * ((int *) p_client_socket);
+    free(p_client_socket);
+
     char message_to_receive[100];
     int *return_value = malloc(sizeof(int));
     memset(message_to_receive, 0, sizeof(message_to_receive));
-
-    int client_socket = * ((int *) p_client_socket);
 
     while (1) {
         int message_reception_status = recv(client_socket, message_to_receive, sizeof(message_to_receive), 0);
@@ -141,40 +149,37 @@ void * handleConnection(void *p_client_socket) {
             break;
         }
 
+        pthread_mutex_lock(&mutex);
         *return_value = handleMessageReception(message_to_receive, sizeof(message_to_receive), client_socket);
-
+        pthread_mutex_unlock(&mutex);
     }
 
+    close(client_socket);
     return return_value;
 }
 
 // Enables the server to listen to client requests and perform the corresponding actions
-int talkToClients() {
+void talkToClients() {
 
     int socket = createServerSocket();
     bindCreatedSocket(socket, PORT);
-    listen(socket, 90);
+    listen(socket, 100);
 
     printf("[+] Waiting for connections...\n");
 
     while (1) {
-        int * client_socket = malloc(sizeof(int));
-        *client_socket = accept(socket, NULL, NULL);
+        int client_socket = accept(socket, NULL, NULL);
 
         if (client_socket < 0) {
             printf("[-] Could not accept client on port %d\n", PORT);
-            return -1;
+            return;
         }
 
-        if (* ((int *) handleConnection(client_socket)) == SERVER_DISCONNECT) {
-            close(*client_socket);
-            close(socket);
-            free(client_socket);
-            break;
-        }
+        pthread_t newThread;
+        int *p_client_socket = malloc(sizeof(int));
+        *p_client_socket = client_socket;
+        pthread_create(&newThread, NULL, handleConnection, p_client_socket);
     }
-
-    return 0;
 }
 
 int main() {
@@ -184,8 +189,6 @@ int main() {
     displayStore(store);
 
     talkToClients();
-
-    displayStore(store);
 
     return 0;
 }

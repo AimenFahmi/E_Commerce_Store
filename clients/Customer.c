@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include <string.h>
+#include <time.h>
 
 #define INTERACTIVE_MODE 0
 #define AUTOMATIC_MODE 1
@@ -45,14 +46,14 @@ void interactiveMode(int client_socket) {
 }
 
 // For a scripted interaction with the server
-void automaticMode(int client_socket) {
-    for (int i = 0; i < 100; ++i) {
-        msleep(100);
-        char amount[12];
-        sprintf(amount, "%d", i);
-        requestServerToWriteItem("aimen", amount, sizeof("aimen"), sizeof(amount), client_socket);
-        requestServerToBuyItem("aimen", amount, sizeof("aimen"), sizeof(amount), client_socket);
-    }
+void automaticMode(int client_socket, int customer_id) {
+    char amount[12];
+    sprintf(amount, "%d", customer_id);
+
+    requestServerToWriteItem("customer", amount, sizeof("customer"), sizeof(amount), client_socket);
+
+    requestServerToBuyItem("customer", amount, sizeof("customer"), sizeof(amount), client_socket);
+
     sendRequest(client_socket, "exit", sizeof("exit"));
 }
 
@@ -67,16 +68,16 @@ int requestServerToWriteItem(const char *item_name, const char *amount, int item
 
     if (sendRequest(client_socket, message_to_send, sizeof(message_to_send)) < 0) {
         printf("[-] Client was unable to send message: '%s'", message_to_send);
-        return -1;
+        exit(-1);
     }
 
     char acknowledgment[10];
     recv(client_socket, acknowledgment, sizeof(acknowledgment), 0);
 
     if (strcmp(acknowledgment, ITEM_WRITING_SUCCESS) == 0) {
-        printf("[+] Client successfully wrote item '%s' with count '%s' to the store\n", item_name, amount);
+        printf("[+] Customer successfully wrote item '%s' with count '%s' to the store\n", item_name, amount);
     } else if (strcmp(acknowledgment, ITEM_WRITING_FAILURE) == 0) {
-        printf("[-] Client was unable to write item '%s' with count '%s' to the store\n", item_name, amount);
+        printf("[-] Customer was unable to write item '%s' with count '%s' to the store\n", item_name, amount);
     }
 
     return 0;
@@ -93,7 +94,7 @@ int requestServerToBuyItem(const char *item_name, const char *amount, int item_n
 
     if (sendRequest(client_socket, message_to_send, sizeof(message_to_send)) < 0) {
         printf("[-] Client was unable to send message: '%s'", message_to_send);
-        return -1;
+        exit(-1);
     }
 
     char acknowledgment[10];
@@ -112,29 +113,31 @@ int requestServerToBuyItem(const char *item_name, const char *amount, int item_n
 
 // Handles all requests coming from a specific client
 // Most important part of the customer
-void handleConnection(int mode) {
+void handleConnection(int mode, int customer_id) {
     int socket = createClientSocket();
     if (socket < 0) {
         printf("[-] Socket creation failed\n");
-        goto close;
+        exit(-1);
     }
     if (connectToServer(socket, PORT) < 0) {
         printf("[-] Connection to server on port %d failed\n", PORT);
-        goto close;
+        close(socket);
+        exit(-1);
     }
 
     if (mode == AUTOMATIC_MODE) {
-        automaticMode(socket);
+        automaticMode(socket, customer_id);
     } else if (mode == INTERACTIVE_MODE) {
         interactiveMode(socket);
     }
 
-    close: close(socket);
+    close(socket);
     shutdown(socket,0);
     shutdown(socket,1);
     shutdown(socket,2);
 }
 
-int main() {
-    handleConnection(AUTOMATIC_MODE);
+int main(int argc, char *argv[]) {
+    handleConnection(AUTOMATIC_MODE, atoi(argv[1]));
+    return 0;
 }
