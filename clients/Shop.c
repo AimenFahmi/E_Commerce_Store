@@ -40,11 +40,14 @@ void interactiveMode(int client_socket) {
 }
 
 // For a scripted interaction with the server
-void automaticMode(int client_socket, int customer_id) {
-    char amount[12];
-    sprintf(amount, "%d", customer_id);
+void automaticMode(int client_socket) {
 
-    requestServerToIncreaseCountOfItem("customer", amount, sizeof("customer"), sizeof(amount), client_socket);
+    for (int i = 0; i < 100; ++i) {
+        char amount[12];
+        sprintf(amount, "%d", getpid());
+
+        requestServerToIncreaseCountOfItem("customer", amount, sizeof("customer"), sizeof(amount), client_socket);
+    }
 
     sendRequest(client_socket, "exit", sizeof("exit"));
 }
@@ -60,7 +63,8 @@ int requestServerToIncreaseCountOfItem(const char *item_name, const char *amount
 
     if (sendRequest(client_socket, message_to_send, sizeof(message_to_send)) < 0) {
         printf("[-] Client was unable to send message: '%s'", message_to_send);
-        return -1;
+        close(client_socket);
+        exit(-1);
     }
 
     char acknowledgment[10];
@@ -77,30 +81,31 @@ int requestServerToIncreaseCountOfItem(const char *item_name, const char *amount
 
 // Handles all requests coming from a specific client
 // Most important part of the shop
-void handleConnection(int mode, int customer_id) {
+void handleConnection(int mode) {
     int socket = createClientSocket();
     if (socket < 0) {
         printf("[-] Socket creation failed\n");
-        goto close;
+        exit(-1);
     }
     if (connectToServer(socket, PORT) < 0) {
         printf("[-] Connection to server on port %d failed\n", PORT);
-        goto close;
+        close(socket);
+        exit(-1);
     }
 
     if (mode == AUTOMATIC_MODE) {
-        automaticMode(socket, customer_id);
+        automaticMode(socket);
     } else if (mode == INTERACTIVE_MODE) {
         interactiveMode(socket);
     }
 
-    close: close(socket);
+    close(socket);
     shutdown(socket,0);
     shutdown(socket,1);
     shutdown(socket,2);
 }
 
-int main(int argc, char *argv[]) {
-    handleConnection(AUTOMATIC_MODE, atoi(argv[1]));
+int main() {
+    handleConnection(AUTOMATIC_MODE);
     return 0;
 }

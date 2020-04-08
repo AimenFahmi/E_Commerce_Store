@@ -257,6 +257,18 @@
 			<Option target="E_Commerce_Store_Shop"/>
 			<Option target="E_Commerce_Store_main"/>
 		</Unit>
+		<Unit filename="/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/queue/Queue.c">
+			<Option target="E_Commerce_Store_Customer"/>
+			<Option target="E_Commerce_Store_server"/>
+			<Option target="E_Commerce_Store_Shop"/>
+			<Option target="E_Commerce_Store_main"/>
+		</Unit>
+		<Unit filename="/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/queue/Queue.h">
+			<Option target="E_Commerce_Store_Customer"/>
+			<Option target="E_Commerce_Store_server"/>
+			<Option target="E_Commerce_Store_Shop"/>
+			<Option target="E_Commerce_Store_main"/>
+		</Unit>
 		<Unit filename="/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/CommunicationProtocol.c">
 			<Option target="E_Commerce_Store_Customer"/>
 			<Option target="E_Commerce_Store_server"/>

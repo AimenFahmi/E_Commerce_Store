@@ -14,6 +14,9 @@ CMakeFiles/E_Commerce_Store_Customer.dir/util/client_utilities/ClientUtilities.c
 CMakeFiles/E_Commerce_Store_Customer.dir/util/exception_handling/Failure.c.o
  /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/exception_handling/Failure.c
  /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/exception_handling/Failure.h
+CMakeFiles/E_Commerce_Store_Customer.dir/util/queue/Queue.c.o
+ /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/queue/Queue.c
+ /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/queue/Queue.h
 CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/CommunicationProtocol.c.o
  /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/CommunicationProtocol.c
  /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/CommunicationProtocol.h

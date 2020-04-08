@@ -399,6 +399,42 @@ util/exception_handling/Failure.c.s:
 	$(MAKE) -f CMakeFiles/E_Commerce_Store_main.dir/build.make CMakeFiles/E_Commerce_Store_main.dir/util/exception_handling/Failure.c.s
 .PHONY : util/exception_handling/Failure.c.s
 
+util/queue/Queue.o: util/queue/Queue.c.o
+
+.PHONY : util/queue/Queue.o
+
+# target to build an object file
+util/queue/Queue.c.o:
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_Customer.dir/build.make CMakeFiles/E_Commerce_Store_Customer.dir/util/queue/Queue.c.o
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_server.dir/build.make CMakeFiles/E_Commerce_Store_server.dir/util/queue/Queue.c.o
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_Shop.dir/build.make CMakeFiles/E_Commerce_Store_Shop.dir/util/queue/Queue.c.o
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_main.dir/build.make CMakeFiles/E_Commerce_Store_main.dir/util/queue/Queue.c.o
+.PHONY : util/queue/Queue.c.o
+
+util/queue/Queue.i: util/queue/Queue.c.i
+
+.PHONY : util/queue/Queue.i
+
+# target to preprocess a source file
+util/queue/Queue.c.i:
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_Customer.dir/build.make CMakeFiles/E_Commerce_Store_Customer.dir/util/queue/Queue.c.i
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_server.dir/build.make CMakeFiles/E_Commerce_Store_server.dir/util/queue/Queue.c.i
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_Shop.dir/build.make CMakeFiles/E_Commerce_Store_Shop.dir/util/queue/Queue.c.i
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_main.dir/build.make CMakeFiles/E_Commerce_Store_main.dir/util/queue/Queue.c.i
+.PHONY : util/queue/Queue.c.i
+
+util/queue/Queue.s: util/queue/Queue.c.s
+
+.PHONY : util/queue/Queue.s
+
+# target to generate assembly for a file
+util/queue/Queue.c.s:
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_Customer.dir/build.make CMakeFiles/E_Commerce_Store_Customer.dir/util/queue/Queue.c.s
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_server.dir/build.make CMakeFiles/E_Commerce_Store_server.dir/util/queue/Queue.c.s
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_Shop.dir/build.make CMakeFiles/E_Commerce_Store_Shop.dir/util/queue/Queue.c.s
+	$(MAKE) -f CMakeFiles/E_Commerce_Store_main.dir/build.make CMakeFiles/E_Commerce_Store_main.dir/util/queue/Queue.c.s
+.PHONY : util/queue/Queue.c.s
+
 util/random_utilities/CommunicationProtocol.o: util/random_utilities/CommunicationProtocol.c.o
 
 .PHONY : util/random_utilities/CommunicationProtocol.o
@@ -537,6 +573,9 @@ help:
 	@echo "... util/exception_handling/Failure.o"
 	@echo "... util/exception_handling/Failure.i"
 	@echo "... util/exception_handling/Failure.s"
+	@echo "... util/queue/Queue.o"
+	@echo "... util/queue/Queue.i"
+	@echo "... util/queue/Queue.s"
 	@echo "... util/random_utilities/CommunicationProtocol.o"
 	@echo "... util/random_utilities/CommunicationProtocol.i"
 	@echo "... util/random_utilities/CommunicationProtocol.s"

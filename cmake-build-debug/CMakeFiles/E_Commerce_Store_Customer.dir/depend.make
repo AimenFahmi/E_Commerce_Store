@@ -14,6 +14,9 @@ CMakeFiles/E_Commerce_Store_Customer.dir/util/client_utilities/ClientUtilities.c
 CMakeFiles/E_Commerce_Store_Customer.dir/util/exception_handling/Failure.c.o: ../util/exception_handling/Failure.c
 CMakeFiles/E_Commerce_Store_Customer.dir/util/exception_handling/Failure.c.o: ../util/exception_handling/Failure.h
 
+CMakeFiles/E_Commerce_Store_Customer.dir/util/queue/Queue.c.o: ../util/queue/Queue.c
+CMakeFiles/E_Commerce_Store_Customer.dir/util/queue/Queue.c.o: ../util/queue/Queue.h
+
 CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/CommunicationProtocol.c.o: ../util/random_utilities/CommunicationProtocol.c
 CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/CommunicationProtocol.c.o: ../util/random_utilities/CommunicationProtocol.h
 

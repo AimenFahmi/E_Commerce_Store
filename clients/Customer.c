@@ -46,13 +46,14 @@ void interactiveMode(int client_socket) {
 }
 
 // For a scripted interaction with the server
-void automaticMode(int client_socket, int customer_id) {
-    char amount[12];
-    sprintf(amount, "%d", customer_id);
+void automaticMode(int client_socket) {
+    for (int i = 0; i < 100; ++i) {
+        char amount[12];
+        sprintf(amount, "%d", getpid());
 
-    requestServerToWriteItem("customer", amount, sizeof("customer"), sizeof(amount), client_socket);
-
-    requestServerToBuyItem("customer", amount, sizeof("customer"), sizeof(amount), client_socket);
+        requestServerToWriteItem("customer", amount, sizeof("customer"), sizeof(amount), client_socket);
+        requestServerToBuyItem("customer", amount, sizeof("customer"), sizeof(amount), client_socket);
+    }
 
     sendRequest(client_socket, "exit", sizeof("exit"));
 }
@@ -68,6 +69,7 @@ int requestServerToWriteItem(const char *item_name, const char *amount, int item
 
     if (sendRequest(client_socket, message_to_send, sizeof(message_to_send)) < 0) {
         printf("[-] Client was unable to send message: '%s'", message_to_send);
+        close(client_socket);
         exit(-1);
     }
 
@@ -94,6 +96,7 @@ int requestServerToBuyItem(const char *item_name, const char *amount, int item_n
 
     if (sendRequest(client_socket, message_to_send, sizeof(message_to_send)) < 0) {
         printf("[-] Client was unable to send message: '%s'", message_to_send);
+        close(client_socket);
         exit(-1);
     }
 
@@ -113,7 +116,7 @@ int requestServerToBuyItem(const char *item_name, const char *amount, int item_n
 
 // Handles all requests coming from a specific client
 // Most important part of the customer
-void handleConnection(int mode, int customer_id) {
+void handleConnection(int mode) {
     int socket = createClientSocket();
     if (socket < 0) {
         printf("[-] Socket creation failed\n");
@@ -126,7 +129,7 @@ void handleConnection(int mode, int customer_id) {
     }
 
     if (mode == AUTOMATIC_MODE) {
-        automaticMode(socket, customer_id);
+        automaticMode(socket);
     } else if (mode == INTERACTIVE_MODE) {
         interactiveMode(socket);
     }
@@ -137,7 +140,7 @@ void handleConnection(int mode, int customer_id) {
     shutdown(socket,2);
 }
 
-int main(int argc, char *argv[]) {
-    handleConnection(AUTOMATIC_MODE, atoi(argv[1]));
+int main() {
+    handleConnection(AUTOMATIC_MODE);
     return 0;
 }

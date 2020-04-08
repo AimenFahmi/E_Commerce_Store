@@ -2,21 +2,8 @@
 // Created by Aimen Fahmi on 2020-03-29.
 //
 
+#include <signal.h>
 #include "server.h"
-#include "store.h"
-#include <stdio.h>
-#include <string.h>
-#include <sys/socket.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <pthread.h>
-
-#include "../util/server_utilities/ServerUtilities.h"
-#include "../util/exception_handling/Failure.h"
-#include "../util/random_utilities/CommunicationProtocol.h"
-
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t mutex2 = PTHREAD_MUTEX_INITIALIZER;
 
 // Tokenizes the string according to the delimiter and returns an array containing all the tokens
 char **tokenize(char *string, int string_size, char *delimiter) {
@@ -149,38 +136,74 @@ void * handleConnection(void *p_client_socket) {
             break;
         }
 
-        pthread_mutex_lock(&mutex);
+        pthread_mutex_lock(&store_mutex);
         *return_value = handleMessageReception(message_to_receive, sizeof(message_to_receive), client_socket);
-        pthread_mutex_unlock(&mutex);
+        pthread_mutex_unlock(&store_mutex);
     }
 
     close(client_socket);
     return return_value;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
+void *thread_function(void *arg) {
+    while (1) {
+        int *client_socket;
+
+        pthread_mutex_lock(&queue_mutex);
+        if ((client_socket = dequeue()) == NULL) {
+            pthread_cond_wait(&condition_variable, &queue_mutex);
+            client_socket = dequeue();
+        }
+        pthread_mutex_unlock(&queue_mutex);
+
+        if (client_socket != NULL) {
+            handleConnection(client_socket);
+        }
+
+    }
+}
+#pragma clang diagnostic pop
+
+void sigintHandler(int num) {
+    close(server_socket);
+    displayStore(store);
+    kill(getpid(), SIGKILL);
+}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
 // Enables the server to listen to client requests and perform the corresponding actions
 void talkToClients() {
+    for (int i = 0; i < THREAD_POOL_SIZE; ++i) {
+        pthread_create(&thread_pool[i], NULL, thread_function, NULL);
+    }
 
-    int socket = createServerSocket();
-    bindCreatedSocket(socket, PORT);
-    listen(socket, 100);
+    signal(SIGINT, sigintHandler);
+    server_socket = createServerSocket();
+    bindCreatedSocket(server_socket, PORT);
+    listen(server_socket, 100);
 
     printf("[+] Waiting for connections...\n");
 
     while (1) {
-        int client_socket = accept(socket, NULL, NULL);
+        int client_socket = accept(server_socket, NULL, NULL);
 
         if (client_socket < 0) {
             printf("[-] Could not accept client on port %d\n", PORT);
-            return;
+            continue;
         }
 
-        pthread_t newThread;
         int *p_client_socket = malloc(sizeof(int));
         *p_client_socket = client_socket;
-        pthread_create(&newThread, NULL, handleConnection, p_client_socket);
+        pthread_mutex_lock(&queue_mutex);
+        enqueue(p_client_socket);
+        pthread_cond_signal(&condition_variable);
+        pthread_mutex_unlock(&queue_mutex);
     }
 }
+#pragma clang diagnostic pop
 
 int main() {
 

@@ -9,8 +9,16 @@
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/hash_table/HashTable.h
 
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/server/server.c
+signal.h
+-
 server.h
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/server/server.h
+
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/server/server.h
+../hash_table/HashTable.h
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/hash_table/HashTable.h
+store.h
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/server/store.h
 store.h
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/server/store.h
 stdio.h
@@ -31,12 +39,10 @@ pthread.h
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/exception_handling/Failure.h
 ../util/random_utilities/CommunicationProtocol.h
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/CommunicationProtocol.h
-
-/Users/aimenfahmi/CLionProjects/E_Commerce_Store/server/server.h
-../hash_table/HashTable.h
-/Users/aimenfahmi/CLionProjects/E_Commerce_Store/hash_table/HashTable.h
-store.h
-/Users/aimenfahmi/CLionProjects/E_Commerce_Store/server/store.h
+../util/queue/Queue.h
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/queue/Queue.h
+../util/random_utilities/RandomUtilities.h
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/RandomUtilities.h
 
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/server/store.h
 ../hash_table/HashTable.h
@@ -48,7 +54,17 @@ stdlib.h
 
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/exception_handling/Failure.h
 
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/queue/Queue.h
+stdio.h
+-
+stdlib.h
+-
+
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/CommunicationProtocol.h
+
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/RandomUtilities.h
+stdlib.h
+-
 
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/server_utilities/ServerUtilities.h
 

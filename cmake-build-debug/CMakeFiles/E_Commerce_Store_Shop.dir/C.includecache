@@ -11,6 +11,8 @@ Shop.h
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/clients/Shop.h
 ../util/client_utilities/ClientUtilities.h
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/client_utilities/ClientUtilities.h
+../util/random_utilities/RandomUtilities.h
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/RandomUtilities.h
 stdlib.h
 -
 stdio.h
@@ -29,4 +31,8 @@ string.h
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/CommunicationProtocol.h
 
 /Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/CommunicationProtocol.h
+
+/Users/aimenfahmi/CLionProjects/E_Commerce_Store/util/random_utilities/RandomUtilities.h
+stdlib.h
+-
 
