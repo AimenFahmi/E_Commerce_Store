@@ -5,38 +5,6 @@
 #include <signal.h>
 #include "server.h"
 
-// Tokenizes the string according to the delimiter and returns an array containing all the tokens
-char **tokenize(char *string, int string_size, char *delimiter) {
-    int number_of_tokens = 0;
-    char *temp_string_1 = malloc(string_size);
-    char *temp_string_2 = malloc(string_size);
-
-    manageMallocFailures(temp_string_1, "variable in tokenize()");
-    manageMallocFailures(temp_string_2, "variable in tokenize()");
-
-    strcpy(temp_string_1, string);
-    strcpy(temp_string_2, string);
-
-    char *token = strtok(temp_string_1, delimiter);
-
-    while (token != NULL) {
-        number_of_tokens++;
-        token = strtok(NULL, delimiter);
-    }
-
-    char **tokens = malloc(number_of_tokens * sizeof(char *));
-
-    manageMallocFailures(tokens, "tokens in server.c/tokenize()");
-
-    tokens[0] = strtok(temp_string_2, delimiter);
-
-    for (int i = 1; i < number_of_tokens; ++i) {
-        tokens[i] = strtok(NULL, delimiter);
-    }
-
-    return tokens;
-}
-
 
 // Returns the clients message in the form of a struct containing all the attributes of the message
 // It is important to note that this function does not check whether the message is in the correct form or not !
@@ -48,18 +16,13 @@ request_t *parseClientMessage(char *received_message, int message_size) {
     char **tokens = tokenize(received_message, message_size, ":");
 
     request->command = tokens[0];
-    
+
     char *key = tokens[2];
     int amount = atoi(tokens[4]);
 
     request->keyValuePair = createKeyValuePair(key, createValue(amount));
 
     return request;
-}
-
-
-void sendAcknowledgment(int client_socket, char *acknowledgment, int acknowledgment_size) {
-    send(client_socket, acknowledgment, acknowledgment_size, 0);
 }
 
 // Parses the clients messages and takes the actual actions requested by the client
@@ -119,7 +82,6 @@ void * handleConnection(void *p_client_socket) {
     free(p_client_socket);
 
     char message_to_receive[100];
-    int *return_value = malloc(sizeof(int));
     memset(message_to_receive, 0, sizeof(message_to_receive));
 
     while (1) {
@@ -127,22 +89,19 @@ void * handleConnection(void *p_client_socket) {
 
         if (message_reception_status < 0) {
             printf("[-] Could not receive message from client on port %d\n", PORT);
-            *return_value = -1;
-            return return_value;
+            close(client_socket);
+            exit(-1);
         }
 
         if (strcmp(message_to_receive, "exit") == 0) {
-            *return_value = SERVER_DISCONNECT;
-            break;
+            close(client_socket);
+            return NULL;
         }
 
         pthread_mutex_lock(&store_mutex);
-        *return_value = handleMessageReception(message_to_receive, sizeof(message_to_receive), client_socket);
+        handleMessageReception(message_to_receive, sizeof(message_to_receive), client_socket);
         pthread_mutex_unlock(&store_mutex);
     }
-
-    close(client_socket);
-    return return_value;
 }
 
 #pragma clang diagnostic push

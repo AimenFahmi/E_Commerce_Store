@@ -13,5 +13,6 @@
 
 int getLine (char *prompt, char *buff, size_t sz);
 int msleep(long msec);
+char **tokenize(char *string, int string_size, char *delimiter);
 
 #endif //E_COMMERCE_STORE_RANDOMUTILITIES_H

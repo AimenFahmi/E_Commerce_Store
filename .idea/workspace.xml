@@ -2,10 +2,10 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
-      <config projectName="E_Commerce_Store" targetName="E_Commerce_Store_server" />
       <config projectName="E_Commerce_Store" targetName="E_Commerce_Store_main" />
-      <config projectName="E_Commerce_Store" targetName="E_Commerce_Store_Customer" />
       <config projectName="E_Commerce_Store" targetName="E_Commerce_Store_Shop" />
+      <config projectName="E_Commerce_Store" targetName="E_Commerce_Store_Customer" />
+      <config projectName="E_Commerce_Store" targetName="E_Commerce_Store_server" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -16,6 +16,19 @@
   <component name="ChangeListManager">
     <list default="true" id="4628c0c8-3b82-40db-89d4-e3e3824cfb8d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_server.dir/C.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_server.dir/C.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_server.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_server.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_server.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_server.dir/depend.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_server.dir/server/server.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_server.dir/server/server.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_server.dir/util/random_utilities/RandomUtilities.c.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_server.dir/util/server_utilities/ServerUtilities.c.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/E_Commerce_Store_server.dir/util/server_utilities/ServerUtilities.c.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/E_Commerce_Store_server" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.c" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.h" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/random_utilities/RandomUtilities.c" beforeDir="false" afterPath="$PROJECT_DIR$/util/random_utilities/RandomUtilities.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/random_utilities/RandomUtilities.h" beforeDir="false" afterPath="$PROJECT_DIR$/util/random_utilities/RandomUtilities.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/server_utilities/ServerUtilities.c" beforeDir="false" afterPath="$PROJECT_DIR$/util/server_utilities/ServerUtilities.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/util/server_utilities/ServerUtilities.h" beforeDir="false" afterPath="$PROJECT_DIR$/util/server_utilities/ServerUtilities.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,50 +45,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/server.c">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/clients/Customer.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4680">
-              <caret line="180" column="5" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
+            <state relative-caret-position="-29">
+              <caret line="49" column="27" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
               <folding>
-                <element signature="e#48#67#0" expanded="true" />
+                <element signature="e#48#69#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cmake-build-debug/activateCustomers.command">
+        <entry file="file://$PROJECT_DIR$/clients/Shop.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cmake-build-debug/activateShops.command">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/run.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+            <state relative-caret-position="167">
+              <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+              <folding>
+                <element signature="e#48#65#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,7 +98,6 @@
         <option value="$PROJECT_DIR$/clients/ClientServices.h" />
         <option value="$PROJECT_DIR$/util/ClientUtilities.c" />
         <option value="$PROJECT_DIR$/sever/server.c" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/clients/RegularClient.c" />
         <option value="$PROJECT_DIR$/server/store.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
@@ -117,16 +105,12 @@
         <option value="$PROJECT_DIR$/main.c" />
         <option value="$PROJECT_DIR$/hash_table/HashTable.h" />
         <option value="$PROJECT_DIR$/util/client_utilities/ClientUtilities.c" />
-        <option value="$PROJECT_DIR$/util/server_utilities/ServerUtilities.c" />
         <option value="$PROJECT_DIR$/server/store.c" />
         <option value="$PROJECT_DIR$/hash_table/HashTable.c" />
-        <option value="$PROJECT_DIR$/util/random_utilities/RandomUtilities.h" />
-        <option value="$PROJECT_DIR$/util/random_utilities/RandomUtilities.c" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/automaticClients" />
         <option value="$PROJECT_DIR$/util/random_utilities/CommunicationProtocol.h" />
         <option value="$PROJECT_DIR$/util/client_utilities/ClientUtilities.h" />
-        <option value="$PROJECT_DIR$/util/server_utilities/ServerUtilities.h" />
         <option value="$PROJECT_DIR$/cmake-build-debug/automaticServer" />
         <option value="$PROJECT_DIR$/cmake-build-debug/automaticClients" />
         <option value="$PROJECT_DIR$/cmake-build-debug/automaticServer.command" />
@@ -134,14 +118,19 @@
         <option value="$PROJECT_DIR$/cmake-build-debug/activateServer.command" />
         <option value="$PROJECT_DIR$/util/queue/Queue.h" />
         <option value="$PROJECT_DIR$/util/queue/Queue.c" />
-        <option value="$PROJECT_DIR$/server/server.h" />
-        <option value="$PROJECT_DIR$/server/server.c" />
         <option value="$PROJECT_DIR$/clients/Customer.h" />
-        <option value="$PROJECT_DIR$/clients/Customer.c" />
         <option value="$PROJECT_DIR$/clients/Shop.h" />
-        <option value="$PROJECT_DIR$/clients/Shop.c" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/util/random_utilities/RandomUtilities.c" />
+        <option value="$PROJECT_DIR$/util/random_utilities/RandomUtilities.h" />
+        <option value="$PROJECT_DIR$/server/server.h" />
+        <option value="$PROJECT_DIR$/util/server_utilities/ServerUtilities.h" />
+        <option value="$PROJECT_DIR$/util/server_utilities/ServerUtilities.c" />
+        <option value="$PROJECT_DIR$/server/server.c" />
         <option value="$PROJECT_DIR$/cmake-build-debug/activateShops.command" />
         <option value="$PROJECT_DIR$/cmake-build-debug/activateCustomers.command" />
+        <option value="$PROJECT_DIR$/clients/Shop.c" />
+        <option value="$PROJECT_DIR$/clients/Customer.c" />
       </list>
     </option>
   </component>
@@ -166,6 +155,11 @@
             <path>
               <item name="E_Commerce_Store" type="b2602c69:ProjectViewProjectNode" />
               <item name="E_Commerce_Store" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="E_Commerce_Store" type="b2602c69:ProjectViewProjectNode" />
+              <item name="E_Commerce_Store" type="462c0819:PsiDirectoryNode" />
+              <item name="clients" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -291,6 +285,7 @@
       <workItem from="1586355877737" duration="18000" />
       <workItem from="1586355954914" duration="270000" />
       <workItem from="1586356451655" duration="89000" />
+      <workItem from="1586356604054" duration="1044000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1585395509498</created>
@@ -446,16 +441,24 @@
       <option name="project" value="LOCAL" />
       <updated>1586356390393</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="new bash script &amp; multi-threaded server ready">
+      <created>1586356736904</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1586356736904</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104193000" />
+    <option name="totallyTimeSpent" value="105237000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="957" extended-state="0" />
+    <frame x="1" y="23" width="1680" height="957" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49619484" visible="true" weight="0.21062271" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49619484" visible="true" weight="0.21306472" />
       <window_info id="Structure" order="1" sideWeight="0.50380516" side_tool="true" weight="0.1935287" />
       <window_info id="Favorites" order="2" sideWeight="0.5017007" side_tool="true" weight="0.16361417" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -690,13 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util/random_utilities/RandomUtilities.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="14" column="7" lean-forward="true" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="26">
@@ -715,13 +711,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="7" column="54" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/server_utilities/ServerUtilities.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>
@@ -749,16 +738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util/random_utilities/RandomUtilities.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="49">
-          <caret line="38" column="43" lean-forward="true" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
-          <folding>
-            <element signature="e#48#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cmake-build-debug/activateServer.command">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
@@ -783,30 +762,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/util/server_utilities/ServerUtilities.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="29" column="4" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
-          <folding>
-            <element signature="e#48#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include/sys/socket.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="690" column="8" selection-start-line="690" selection-start-column="8" selection-end-line="690" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/clients/Customer.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="116" column="53" lean-forward="true" selection-start-line="116" selection-start-column="53" selection-end-line="116" selection-end-column="53" />
-          <folding>
-            <element signature="e#48#69#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -824,47 +783,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/server.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
-          <folding>
-            <element signature="e#117#153#0" expanded="true" />
-          </folding>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="156">
+            <caret line="6" column="115" selection-start-line="6" selection-start-column="115" selection-end-line="6" selection-end-column="115" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/clients/Shop.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="96" column="30" selection-start-line="96" selection-start-column="30" selection-end-line="96" selection-end-column="30" />
-          <folding>
-            <element signature="e#48#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/server.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4680">
-          <caret line="180" column="5" selection-start-line="180" selection-start-column="5" selection-end-line="180" selection-end-column="5" />
-          <folding>
-            <element signature="e#48#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/activateCustomers.command">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmake-build-debug/activateShops.command">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -875,10 +805,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/util/random_utilities/RandomUtilities.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+        <state>
+          <caret line="61" selection-start-line="61" selection-end-line="61" selection-end-column="63" />
+          <folding>
+            <element signature="e#48#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/random_utilities/RandomUtilities.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="15" column="64" selection-start-line="15" selection-start-column="64" selection-end-line="15" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/server_utilities/ServerUtilities.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="10" column="90" selection-start-line="10" selection-start-column="90" selection-end-line="10" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="17" column="44" lean-forward="true" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/activateShops.command">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/activateCustomers.command">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="99" lean-forward="true" selection-start-line="99" selection-end-line="99" />
+          <folding>
+            <element signature="e#48#67#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/server_utilities/ServerUtilities.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-598">
+          <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clients/Shop.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="44" column="27" selection-start-line="44" selection-start-column="27" selection-end-line="44" selection-end-column="27" />
+          <folding>
+            <element signature="e#48#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clients/Customer.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-29">
+          <caret line="49" column="27" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
+          <folding>
+            <element signature="e#48#69#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

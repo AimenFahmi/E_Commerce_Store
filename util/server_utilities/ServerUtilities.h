@@ -8,5 +8,6 @@
 
 int createServerSocket();
 int bindCreatedSocket(int socket, unsigned int client_port);
+void sendAcknowledgment(int client_socket, char *acknowledgment, int acknowledgment_size);
 
 #endif //E_COMMERCE_STORE_SERVERUTILITIES_H

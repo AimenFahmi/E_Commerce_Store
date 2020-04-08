@@ -3,6 +3,7 @@
 //
 
 #include "ServerUtilities.h"
+#include "../exception_handling/Failure.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -42,5 +43,10 @@ int bindCreatedSocket(int socket, unsigned int client_port) {
     }
 
     return binding_status;
+}
+
+
+void sendAcknowledgment(int client_socket, char *acknowledgment, int acknowledgment_size) {
+    send(client_socket, acknowledgment, acknowledgment_size, 0);
 }
 

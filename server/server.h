@@ -47,7 +47,5 @@ void *thread_function(void * arg);
 void talkToClients();
 int handleMessageReception(char *message, int message_size,int client_socket);
 request_t *parseClientMessage(char *received_message, int message_size);
-char **tokenize(char *string, int string_size, char *delimiter);
-void sendAcknowledgment(int client_socket, char *acknowledgment, int acknowledgment_size);
 
 #endif //E_COMMERCE_STORE_SERVER_H

@@ -20,6 +20,7 @@ CMakeFiles/E_Commerce_Store_Customer.dir/util/queue/Queue.c.o: ../util/queue/Que
 CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/CommunicationProtocol.c.o: ../util/random_utilities/CommunicationProtocol.c
 CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/CommunicationProtocol.c.o: ../util/random_utilities/CommunicationProtocol.h
 
+CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/RandomUtilities.c.o: ../util/exception_handling/Failure.h
 CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/RandomUtilities.c.o: ../util/random_utilities/RandomUtilities.c
 CMakeFiles/E_Commerce_Store_Customer.dir/util/random_utilities/RandomUtilities.c.o: ../util/random_utilities/RandomUtilities.h
 
